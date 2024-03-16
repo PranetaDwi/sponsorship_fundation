@@ -3,6 +3,7 @@
 namespace App\Service\Auth;
 
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\UserRegisterRequest;
 use App\Http\Resources\Auth\LoginResource;
 use App\Http\Responses\ApiResponse;
@@ -12,7 +13,6 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthServiceImpl implements AuthService
 {
@@ -47,11 +47,39 @@ class AuthServiceImpl implements AuthService
                 'user' => LoginResource::make($user),
                 'token' => $token,
             ];
-
             return $data;
         }catch (\Exception $exception) {
             throw new Exception($exception->getMessage(), $exception->getCode());
         }
+    }
+
+    public function userRegister(RegisterRequest $request)
+    {
+        $validatedData = $request->validated();
+        DB::beginTransaction();
+        try {
+            $user = $this->userRepository->save($validatedData);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }
+        try {
+            $validatedData['user_id'] = $user->id;
+            $userData = $this->userDataRepository->save($validatedData);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }
+        DB::commit();
+
+        $data = [
+            'user' => $user,
+            'user_data' => $userData,
+        ];
+        return $data;
     }
 
 }

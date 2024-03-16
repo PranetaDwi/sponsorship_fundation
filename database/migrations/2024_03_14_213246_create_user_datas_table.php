@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('full_name', 80);
             $table->string('phone', 15);
-            $table->string('picture_profile_file', 191)->nullable();
-            $table->text('address')->nullable();
+            $table->string('gender', 15)->nullable();
+            $table->string('username', 30)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
