@@ -36,7 +36,7 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::middleware(['scopes:entrepreneur'])->group(function () {
-        Route::get('/my-sponsor', function () {
+        Route::get('/my-sponsorship', function () {
             return 'Welcome my Sponsor Menu';
         });
     });

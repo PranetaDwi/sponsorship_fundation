@@ -3,13 +3,13 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\User;
-use App\Models\UserData;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use App\Models\User;
+use App\Models\UserData;
 
-class UserSeeder extends Seeder
+class EntrepreneurSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,16 +18,16 @@ class UserSeeder extends Seeder
     {
         $user = new User();
         $user->account_id = 'ID_03222161843839';
-        $user->email = 'user1@mail.com';
+        $user->email = 'entrepreneur@mail.com';
         $user->remember_token = Str::random(10);
-        $user->password = Hash::make('00000000');
-        $user->role = 'user';
+        $user->password = Hash::make('12345678');
+        $user->role = 'entrepreneur';
         $user->status = 'active';
         $user->save();
 
-        $userData = UserData::factory()->create([
+        UserData::factory()->create([
             'user_id' => $user->id,
-            'full_name' => 'user',
+            'full_name' => 'entrepreneur user',
         ]);
     }
 }

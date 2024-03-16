@@ -19,7 +19,6 @@ class LoginResource extends JsonResource
                 'account_id' => $this->account_id,
                 'full_name' => $this->userData->full_name,
                 'role' => $this->role,
-                'picture_profile_file' => $this->userData->picture_profile_file,
             ];
         }
         

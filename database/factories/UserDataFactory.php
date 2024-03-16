@@ -17,8 +17,9 @@ class UserDataFactory extends Factory
     public function definition(): array
     {
         return [
-            'full_name' => fake()->name(),
-            'phone' => fake()->regexify('[0-9]{12}')
+            'username' => fake()->name(),
+            'phone' => fake()->regexify('[0-9]{12}'),
+            'gender' => 'womin'
         ];
     }
 }

@@ -20,6 +20,6 @@ class AuthLogin
             return $next($request);
         }
 
-        return redirect()->route('login');
+        return redirect()->route('api.login');
     }
 }
