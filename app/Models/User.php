@@ -62,4 +62,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserData::class);
     }
+
+    public function organizer()
+    {
+        return $this->hasOne(Organizer::class);
+    }
+
+    public function entrepreneur()
+    {
+        return $this->hasOne(Entrepreneur::class);
+    }
 }

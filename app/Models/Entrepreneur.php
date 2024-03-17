@@ -5,11 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Organization extends Model
+class Entrepreneur extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'address', 'city', 'province', 'photo_file'
+        'user_id',
+        'umkm_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

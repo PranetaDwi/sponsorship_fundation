@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Umkm extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name', 'description', 'address', 'city', 'province', 'photo_file'
+    ];
 }
