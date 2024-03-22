@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('event_categories', function (Blueprint $table) {
-            $table->id();
+            $table->integerIncrements('id');
+            $table->unsignedInteger('event_id')->index('event_id')->unique();
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->unsignedInteger('event_category_name_id')->index('event_category_name_id')->unique();
+            $table->foreign('event_category_name_id')->references('id')->on('event_category_names')->onDelete('cascade');
             $table->timestamps();
         });
     }

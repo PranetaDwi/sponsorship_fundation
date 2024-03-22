@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('event_category_names', function (Blueprint $table) {
-            $table->id();
+            $table->integerIncrements('id');
+            $table->string('name', 50);
             $table->timestamps();
         });
     }

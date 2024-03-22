@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bookmarks', function (Blueprint $table) {
-            $table->id();
+            $table->integerIncrements('id');
+            $table->unsignedInteger('event_id')->index('event_id')->unique();
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->unsignedInteger('entrepreneur_id')->index('entrepreneur_id')->unique();
+            $table->foreign('entrepreneur_id')->references('id')->on('entrepreneurs')->onDelete('cascade');
             $table->timestamps();
         });
     }

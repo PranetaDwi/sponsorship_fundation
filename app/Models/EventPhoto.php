@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class EventPhoto extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'event_id', 'photo_file'
+    ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 }
