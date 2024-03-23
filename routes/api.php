@@ -44,12 +44,12 @@ Route::prefix('v1')->group(function () {
             Route::post('/add-organization/{id}', [OrganizationController::class, 'addOrganization'])->name('api.add-organization');
 
             Route::prefix('events')->group(function () {
+                Route::get('event-categories', [EventController::class, 'eventCategories'])->name('api.event-categories');
                 Route::get('/my-event-lists', [EventController::class, 'index'])->name('api.my-event-lists');
                 Route::post('/create', [EventController::class, 'store'])->name('api.event-create');
-                
-                // Route::get('/{id}', [EventController::class, 'show'])->name('api.event-show');
-                // Route::put('/update/{id}', [EventController::class, 'update'])->name('api.event-update');
-                // Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('api.event-delete');
+                Route::get('/detail-event/{id}', [EventController::class, 'show'])->name('api.event-show');
+                Route::put('/update/{id}', [EventController::class, 'update'])->name('api.event-update');
+                Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('api.event-delete');
             });
         });
     

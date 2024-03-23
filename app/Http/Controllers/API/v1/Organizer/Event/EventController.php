@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API\v1\Organizer\Event;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Organizer\Event\CreateNewEventRequest;
+use App\Http\Resources\Organizer\Event\EventCategoriesResource;
 use App\Http\Resources\Organizer\Event\EventPreviewResource;
 use Illuminate\Http\Request;
 use App\Service\Organizer\Event\EventService;
@@ -29,9 +30,14 @@ class EventController extends Controller
         }
     }
 
-    public function create()
+    public function eventCategories()
     {
-        //
+        try {
+            $eventCategories = $this->eventService->getEventCategories();
+            return new ApiResponse('success',  __('validation.message.loaded'), EventCategoriesResource::collection($eventCategories), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
     }
 
     public function store(CreateNewEventRequest $request)

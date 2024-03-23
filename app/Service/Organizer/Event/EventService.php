@@ -8,6 +8,8 @@ interface EventService
 {
     public function getMyEvents();
 
+    public function getEventCategories();
+
     public function postEvents(CreateNewEventRequest $request);
 
     public function editEvents(string $id);
