@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\API\v1\Organization;
+namespace App\Http\Controllers\API\v1\Organizer\Organization;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Organization\OrganizationEnrollmentRequest;
-use App\Http\Resources\Organization\OrganizationResource;
+use App\Http\Requests\Organizer\Organization\OrganizationEnrollmentRequest;
+use App\Http\Resources\Organizer\Organization\OrganizationResource;
 use App\Http\Responses\ApiResponse;
-use App\Service\Organization\OrganizationService;
+use App\Service\Organizer\Organization\OrganizationService;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
@@ -17,9 +17,7 @@ class OrganizationController extends Controller
     {
         $this->organizationService = $organizationService;
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         try {
@@ -30,17 +28,11 @@ class OrganizationController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(OrganizationEnrollmentRequest $request)
     {
         try {
@@ -59,33 +51,21 @@ class OrganizationController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //

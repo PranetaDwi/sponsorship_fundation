@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service\Umkm;
+namespace App\Service\Entrepreneur\Umkm;
 
-use App\Http\Requests\Umkm\UmkmEnrollmentRequest;
+use App\Http\Requests\Entrepreneur\Umkm\UmkmEnrollmentRequest;
 
 interface UmkmService
 {

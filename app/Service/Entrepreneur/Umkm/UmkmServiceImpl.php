@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service\Umkm;
+namespace App\Service\Entrepreneur\Umkm;
 
-use App\Http\Requests\Umkm\UmkmEnrollmentRequest;
+use App\Http\Requests\Entrepreneur\Umkm\UmkmEnrollmentRequest;
 use App\Models\Entrepreneur;
 use App\Repository\Umkm\UmkmRepository;
 use Exception;

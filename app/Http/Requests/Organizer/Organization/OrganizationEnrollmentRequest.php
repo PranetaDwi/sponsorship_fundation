@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Umkm;
+namespace App\Http\Requests\Organizer\Organization;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\ApiResponseValidationException;
 
-class UmkmEnrollmentRequest extends FormRequest
+class OrganizationEnrollmentRequest extends FormRequest
 {
     use ApiResponseValidationException;
     /**

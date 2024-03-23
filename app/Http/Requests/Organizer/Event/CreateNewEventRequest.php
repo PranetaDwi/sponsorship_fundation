@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Event;
+namespace App\Http\Requests\Organizer\Event;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Traits\ApiResponseValidationException;
 
 class CreateNewEventRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
+    use ApiResponseValidationException;
+    
     public function authorize(): bool
     {
         return true;
@@ -22,16 +22,21 @@ class CreateNewEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'organizer_id' => ['required', 'exists:organizers,id'],
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required'],
             'target_fund' => ['required', 'integer'],
             'donation_deadline' => ['required', 'date'],
-            'event_date' => ['required', 'date'],
+            'event_start_date' => ['required', 'date'],
+            'event_end_date' => ['required', 'date'],
             'event_venue' => ['required', 'string', 'max:200'],
-            'status_event' => ['required', 'string', 'max:40'],
+            'address' => ['required'],
             'city' => ['required', 'string', 'max:100'],
             'province' => ['required', 'string', 'max:100'],
+            'target_participants' => ['required', 'integer'],
+            'participant_description' => ['required'],
+            'status_event' => ['required', 'string', 'max:40'],
+            'event_category_id.*' => ['required', 'integer', 'exists:event_category_names,id'],
+            'photo_file.*' => ['required', 'image','mimes:jpeg,png,jpg', 'max:2048'],
         ];
     }
 }

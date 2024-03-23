@@ -19,7 +19,6 @@ class UserDataFactory extends Factory
         return [
             'username' => fake()->name(),
             'phone' => fake()->regexify('[0-9]{12}'),
-            'gender' => 'womin'
         ];
     }
 }

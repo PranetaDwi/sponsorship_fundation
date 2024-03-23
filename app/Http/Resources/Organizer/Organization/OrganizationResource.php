@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Umkm;
+namespace App\Http\Resources\Organizer\Organization;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UmkmResource extends JsonResource
+class OrganizationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,6 +23,7 @@ class UmkmResource extends JsonResource
             'province' => $this->province,
             'photo_file' => $this->photo_file,
         ];
+        
         return parent::toArray($request);
     }
 }

@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\API\v1\Auth\LoginController;
 use App\Http\Controllers\API\v1\Auth\RegisterController;
-use App\Http\Controllers\API\v1\Umkm\UmkmController;
-use App\Http\Controllers\API\v1\Organization\OrganizationController;
+use App\Http\Controllers\API\v1\Entrepreneur\Umkm\UmkmController;
+use App\Http\Controllers\API\v1\Organizer\Organization\OrganizationController;
+use App\Http\Controllers\API\v1\Organizer\Event\EventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +42,15 @@ Route::prefix('v1')->group(function () {
             Route::post('/organization-enrollment', [OrganizationController::class, 'store'])->name('api.organization-enrollment');
             Route::get('/organization-lists', [OrganizationController::class, 'index'])->name('api.organization-lists');
             Route::post('/add-organization/{id}', [OrganizationController::class, 'addOrganization'])->name('api.add-organization');
+
+            Route::prefix('events')->group(function () {
+                Route::get('/my-event-lists', [EventController::class, 'index'])->name('api.my-event-lists');
+                Route::post('/create', [EventController::class, 'store'])->name('api.event-create');
+                
+                // Route::get('/{id}', [EventController::class, 'show'])->name('api.event-show');
+                // Route::put('/update/{id}', [EventController::class, 'update'])->name('api.event-update');
+                // Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('api.event-delete');
+            });
         });
     
         // Untuk user entrepreneur

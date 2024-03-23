@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service\Organization;
+namespace App\Service\Organizer\Organization;
 
-use App\Http\Requests\Organization\OrganizationEnrollmentRequest;
+use App\Http\Requests\Organizer\Organization\OrganizationEnrollmentRequest;
 use App\Models\Organization;
 
 interface OrganizationService

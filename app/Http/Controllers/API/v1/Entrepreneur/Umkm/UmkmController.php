@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\API\v1\Umkm;
+namespace App\Http\Controllers\API\v1\Entrepreneur\Umkm;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Umkm\UmkmEnrollmentRequest;
-use App\Http\Resources\Umkm\UmkmResource;
+use App\Http\Requests\Entrepreneur\Umkm\UmkmEnrollmentRequest;
+use App\Http\Resources\Entrepreneur\Umkm\UmkmResource;
 use Illuminate\Http\Request;
-use App\Service\Umkm\UmkmService;
+use App\Service\Entrepreneur\Umkm\UmkmService;
 use App\Http\Responses\ApiResponse;
 
 

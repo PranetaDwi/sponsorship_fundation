@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Service\Event;
+namespace App\Service\Organizer\Event;
 
-use App\Http\Requests\Event\CreateNewEventRequest;
+use App\Http\Requests\Organizer\Event\CreateNewEventRequest;
 
 interface EventService
 {
-    public function getEvents();
+    public function getMyEvents();
 
     public function postEvents(CreateNewEventRequest $request);
 
