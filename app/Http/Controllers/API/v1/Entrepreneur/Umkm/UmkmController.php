@@ -40,19 +40,10 @@ class UmkmController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UmkmEnrollmentRequest $request)
+    public function store($user_id, UmkmEnrollmentRequest $request)
     {
         try {
-            return new ApiResponse('success',  __('validation.message.created'), $this->umkmService->postumkmEnrollment($request), 200);
-        } catch (\Exception $exception) {
-            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
-        }
-    }
-
-    public function addUmkm(string $id)
-    {
-        try {
-            return new ApiResponse('success',  __('validation.message.created'), $this->umkmService->addUmkm($id), 200);
+            return new ApiResponse('success',  __('validation.message.created'), $this->umkmService->postumkmEnrollment($request, $user_id), 200);
         } catch (\Exception $exception) {
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }

@@ -30,8 +30,6 @@ class RegisterRequest extends FormRequest
                 'password_confirmation' => 'required|same:password',
                 'full_name' => 'required|string|regex:/^[a-zA-Z ]+$/',
                 'phone' => ['required', 'numeric', 'regex:/^62\d{9,}$/'],
-                'role' => 'required',
-                'status' => 'required'
             ];
     }
 }

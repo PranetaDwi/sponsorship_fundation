@@ -9,8 +9,8 @@ interface OrganizationService
 {
     public function getOrganizationLists();
 
-    public function postOrganizationEnrollment(OrganizationEnrollmentRequest $request);
+    public function postOrganizationEnrollment(OrganizationEnrollmentRequest $request, $user_id);
 
-    public function addOrganization(string $id);
+    // public function addOrganization(string $id);
 
 }

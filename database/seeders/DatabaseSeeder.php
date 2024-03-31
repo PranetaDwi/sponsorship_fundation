@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(EntrepreneurSeeder::class);
         $this->call(OrganizerSeeder::class);
         $this->call(EventCategoryNameSeeder::class);
+        $this->call(ParticipantCategoryNameSeeder::class);
     }
 }

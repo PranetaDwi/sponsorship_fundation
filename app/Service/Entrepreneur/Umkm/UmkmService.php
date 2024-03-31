@@ -8,8 +8,6 @@ interface UmkmService
 {
     public function getumkmLists();
 
-    public function postumkmEnrollment(UmkmEnrollmentRequest $request);
-
-    public function addUmkm(string $id);
+    public function postumkmEnrollment(UmkmEnrollmentRequest $request, $user_id);
 
 }

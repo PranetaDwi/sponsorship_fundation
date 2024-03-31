@@ -33,19 +33,10 @@ class OrganizationController extends Controller
         //
     }
 
-    public function store(OrganizationEnrollmentRequest $request)
+    public function store(OrganizationEnrollmentRequest $request, $user_id)
     {
         try {
-            return new ApiResponse('success',  __('validation.message.created'), $this->organizationService->postOrganizationEnrollment($request), 200);
-        } catch (\Exception $exception) {
-            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
-        }
-    }
-
-    public function addOrganization(string $id)
-    {
-        try {
-            return new ApiResponse('success',  __('validation.message.created'), $this->organizationService->addOrganization($id), 200);
+            return new ApiResponse('success',  __('validation.message.created'), $this->organizationService->postOrganizationEnrollment($request, $user_id), 200);
         } catch (\Exception $exception) {
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }

@@ -66,7 +66,7 @@ class EventServiceImpl implements EventService
                 'title' => $request->title,
                 'description' => $request->description,
                 'target_fund' => $request->target_fund,
-                'donation_deadline' => $request->donation_deadline,
+                'sponsor_deadline' => $request->sponsor_deadline,
                 'event_start_date' => $request->event_start_date,
                 'event_end_date' => $request->event_end_date,
                 'event_venue' => $request->event_venue,
@@ -76,6 +76,7 @@ class EventServiceImpl implements EventService
                 'target_participants' => $request->target_participants,
                 'participant_description' => $request->participant_description,
                 'status_event' => $request->status_event,
+                'type_event' => $request->type_event,
             ];
 
             $response['event'] = $this->eventRepository->save($eventData);

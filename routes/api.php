@@ -22,10 +22,19 @@ Route::prefix('v1')->group(function () {
     // Endpoint untuk autentikasi
     Route::prefix('auth')->group(function () {
         Route::post('/login', [LoginController::class, 'login'])->name('api.login');
-        Route::post('/register', [RegisterController::class, 'userRegister'])->name('api.register');
+        // Endpoint untuk registrasi Organizer
+        Route::post('/register', [RegisterController::class, 'organizerRegister'])->name('api.register-organizer');
+        Route::post('/organization-enrollment/{user_id}', [OrganizationController::class, 'store'])->name('api.organization-enrollment');
+        // Endpoint untuk registrasi Entrepreneur
+        Route::post('/register-entrepreneur', [RegisterController::class, 'entrepreneurRegister'])->name('api.register-entrepreneur');
+        Route::post('/umkm-enrollment/{user_id}', [UmkmController::class, 'store'])->name('api.umkm-enrollment');
+
     });
 
     // Endpoint tanpa autentikasi
+    Route::get('/welcome', function () {
+        return 'Welcome to API';
+    });
 
     // Mulai menggunakan middleware
     Route::middleware('auth:api')->group(function () {
@@ -39,25 +48,23 @@ Route::prefix('v1')->group(function () {
 
         // Untuk user organizer
         Route::middleware(['scopes:organizer'])->group(function () {
-            Route::post('/organization-enrollment', [OrganizationController::class, 'store'])->name('api.organization-enrollment');
             Route::get('/organization-lists', [OrganizationController::class, 'index'])->name('api.organization-lists');
-            Route::post('/add-organization/{id}', [OrganizationController::class, 'addOrganization'])->name('api.add-organization');
+            // Route::post('/add-organization/{id}', [OrganizationController::class, 'addOrganization'])->name('api.add-organization');
 
             Route::prefix('events')->group(function () {
                 Route::get('event-categories', [EventController::class, 'eventCategories'])->name('api.event-categories');
                 Route::get('/my-event-lists', [EventController::class, 'index'])->name('api.my-event-lists');
                 Route::post('/create', [EventController::class, 'store'])->name('api.event-create');
-                Route::get('/detail-event/{id}', [EventController::class, 'show'])->name('api.event-show');
-                Route::put('/update/{id}', [EventController::class, 'update'])->name('api.event-update');
-                Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('api.event-delete');
+                // Route::get('/detail-event/{id}', [EventController::class, 'show'])->name('api.event-show');
+                // Route::put('/update/{id}', [EventController::class, 'update'])->name('api.event-update');
+                // Route::delete('/delete/{id}', [EventController::class, 'destroy'])->name('api.event-delete');
             });
         });
     
         // Untuk user entrepreneur
         Route::middleware(['scopes:entrepreneur'])->group(function () {
-            Route::post('/umkm-enrollment', [UmkmController::class, 'store'])->name('api.umkm-enrollment');
             Route::get('/umkm-lists', [UmkmController::class, 'index'])->name('api.umkm-lists');
-            Route::post('/add-umkm/{id}', [UmkmController::class, 'addUmkm'])->name('api.add-umkm');
+            // Route::post('/add-umkm/{id}', [UmkmController::class, 'addUmkm'])->name('api.add-umkm');
         });
     
     });

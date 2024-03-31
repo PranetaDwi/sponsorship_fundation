@@ -17,10 +17,20 @@ class RegisterController extends Controller
         $this->authService = $authService;
     }
 
-    public function userRegister(RegisterRequest $request)
+    public function organizerRegister(RegisterRequest $request)
     {
         try{
-            return new ApiResponse('success',  __('validation.message.registered'), $this->authService->userRegister($request), 201);
+            return new ApiResponse('success',  __('validation.message.registered'), $this->authService->organizerRegister($request), 201);
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
+            return new ApiResponse('error', $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
+    public function entrepreneurRegister(RegisterRequest $request)
+    {
+        try{
+            return new ApiResponse('success',  __('validation.message.registered'), $this->authService->entrepreneurRegister($request), 201);
         }catch (\Exception $exception){
             dd($exception->getMessage());
             return new ApiResponse('error', $exception->getMessage(), null, $exception->getCode());

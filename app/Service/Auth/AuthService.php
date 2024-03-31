@@ -9,6 +9,8 @@ interface AuthService
 {
     public function login(LoginRequest $request);
 
-    public function userRegister(RegisterRequest $request);
+    public function organizerRegister(RegisterRequest $request);
+
+    public function entrepreneurRegister(RegisterRequest $request);
 
 }

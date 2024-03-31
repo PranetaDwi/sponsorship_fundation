@@ -31,10 +31,11 @@ class UmkmServiceImpl implements UmkmService
         }
     }
 
-    public function postumkmEnrollment(UmkmEnrollmentRequest $request)
+    public function postumkmEnrollment(UmkmEnrollmentRequest $request, $user_id)
     {
+        $validatedData = $request->validated();
         try {
-            $validatedData = $request->validated();
+            
             $file = $request->photo_file;
             $filenameWithExt = $file->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -43,24 +44,18 @@ class UmkmServiceImpl implements UmkmService
             $path = $file->storeAs('public/' . $filenameOriginal);
             $validatedData['photo_file'] = 'storage/'.$filenameOriginal;
             $umkm = $this->umkmRepository->save($validatedData);
-            return $umkm;
         }catch (\Exception $exception){
             throw new Exception(__('validation.message.something_went_wrong'), 500);
         }catch (AuthorizationException $exception) {
             throw new Exception('You are not authorized to access', 403);
         }
-    }
 
-    public function addUmkm(string $id)
-    {
         try {
-            $userId = auth()->user()->id;
-            $data = [
-                'user_id' => $userId,
-                'umkm_id' => $id
+            $dataUmkm = [
+                'user_id' => $user_id,
+                'umkm_id' => $umkm->id
             ];
-            $umkm = Entrepreneur::create($data);
-            return $umkm;
+            $relation = Entrepreneur::create($dataUmkm);
         }catch (\Exception $exception){
             throw new Exception(__('validation.message.something_went_wrong'), 500);
         }catch (AuthorizationException $exception) {
@@ -68,5 +63,13 @@ class UmkmServiceImpl implements UmkmService
         }catch (ModelNotFoundException $exception) {
             throw new Exception('Model not found', 404);
         }
+
+        $data = [
+            'umkm' => $umkm,
+            'entrepreneur' => $relation
+        ];
+
+        return $data;
+        
     }
 }

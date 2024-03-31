@@ -53,11 +53,44 @@ class AuthServiceImpl implements AuthService
         }
     }
 
-    public function userRegister(RegisterRequest $request)
+    public function organizerRegister(RegisterRequest $request)
     {
         $validatedData = $request->validated();
         DB::beginTransaction();
         try {
+            $validatedData['role'] = 'organizer';
+            $validatedData['status'] = 'active';
+            $user = $this->userRepository->save($validatedData);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }
+        try {
+            $validatedData['user_id'] = $user->id;
+            $userData = $this->userDataRepository->save($validatedData);
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+            DB::rollBack();
+            Log::error($e->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }
+        DB::commit();
+
+        $data = [
+            'user' => $user,
+            'user_data' => $userData,
+        ];
+        return $data;
+    }
+
+    public function entrepreneurRegister(RegisterRequest $request)
+    {
+        $validatedData = $request->validated();
+        DB::beginTransaction();
+        try {
+            $validatedData['role'] = 'entrepreneur';
+            $validatedData['status'] = 'active';
             $user = $this->userRepository->save($validatedData);
         } catch (\Exception $e) {
             DB::rollBack();

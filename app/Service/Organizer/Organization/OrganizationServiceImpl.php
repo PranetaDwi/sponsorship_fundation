@@ -32,10 +32,10 @@ class OrganizationServiceImpl implements OrganizationService
         }
     }
 
-    public function postOrganizationEnrollment(OrganizationEnrollmentRequest $request)
+    public function postOrganizationEnrollment(OrganizationEnrollmentRequest $request, $user_id)
     {
+        $validatedData = $request->validated();
         try {
-            $validatedData = $request->validated();
             $file = $request->photo_file;
             $filenameWithExt = $file->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -44,30 +44,32 @@ class OrganizationServiceImpl implements OrganizationService
             $path = $file->storeAs('public/' . $filenameOriginal);
             $validatedData['photo_file'] = 'storage/'.$filenameOriginal;
             $organizer = $this->organizationRepository->save($validatedData);
-            return $organizer;
         }catch (\Exception $exception){
             throw new Exception(__('validation.message.something_went_wrong'), 500);
         }catch (AuthorizationException $exception) {
             throw new Exception('You are not authorized to access', 403);
         }
-    }
 
-    public function addOrganization(string $id)
-    {
         try {
-            $userId = auth()->user()->id;
-            $data = [
-                'user_id' => $userId,
-                'organization_id' => $id
+            $dataOrganizer = [
+                'user_id' => $user_id,
+                'organization_id' => $organizer->id
             ];
-            $organization = Organizer::create($data);
-            return $organization;
+            $relation = Organizer::create($dataOrganizer);
         }catch (\Exception $exception){
+            dd($exception->getMessage());
             throw new Exception(__('validation.message.something_went_wrong'), 500);
         }catch (AuthorizationException $exception) {
             throw new Exception('You are not authorized to access', 403);
         }catch (ModelNotFoundException $exception) {
             throw new Exception('Model not found', 404);
         }
+
+        $data = [
+            'organization' => $organizer,
+            'organizer' => $relation
+        ];
+
+        return $data;
     }
 }

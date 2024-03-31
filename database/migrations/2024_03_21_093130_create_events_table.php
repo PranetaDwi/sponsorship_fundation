@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title', 100);
             $table->text('description');
             $table->unsignedBigInteger('target_fund');
-            $table->date('donation_deadline');
+            $table->date('sponsor_deadline');
             $table->date('event_start_date');
             $table->date('event_end_date');
             $table->string('event_venue', 200);
@@ -28,6 +28,7 @@ return new class extends Migration
             $table->unsignedMediumInteger('target_participants');
             $table->text('participant_description');
             $table->string('status_event', 40);
+            $table->string('type_event', 40);
             $table->timestamps();
             $table->softDeletes();
         });

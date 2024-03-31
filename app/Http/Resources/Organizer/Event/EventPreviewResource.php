@@ -17,7 +17,7 @@ class EventPreviewResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'donation_deadline' => $this->donation_deadline,
+            'sponsor_deadline' => $this->donation_deadline,
             'target_fund' => $this->target_fund,
             'event_start_date' => $this->event_start_date,
             'event_end_date' => $this->event_end_date,
