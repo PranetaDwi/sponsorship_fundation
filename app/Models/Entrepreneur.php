@@ -11,7 +11,7 @@ class Entrepreneur extends Model
 
     protected $fillable = [
         'user_id',
-        'umkm_id'
+        'mitra_id'
     ];
 
     public function user()

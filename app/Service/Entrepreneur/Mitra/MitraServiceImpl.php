@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Service\Entrepreneur\Umkm;
+namespace App\Service\Entrepreneur\Mitra;
 
-use App\Http\Requests\Entrepreneur\Umkm\UmkmEnrollmentRequest;
+use App\Http\Requests\Entrepreneur\Mitra\MitraEnrollmentRequest;
 use App\Models\Entrepreneur;
-use App\Repository\Umkm\UmkmRepository;
+use App\Repository\Mitra\MitraRepository;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class UmkmServiceImpl implements UmkmService
+class MitraServiceImpl implements MitraService
 {
-    protected $umkmRepository;
+    protected $mitraRepository;
 
 
-    public function __construct(UmkmRepository $umkmRepository)
+    public function __construct(MitraRepository $mitraRepository)
     {
-        $this->umkmRepository = $umkmRepository;
+        $this->mitraRepository = $mitraRepository;
     }
     
-    public function getumkmLists()
+    public function getmitraLists()
     {
         try {
-            $umkmList = $this->umkmRepository->findAll();
-            return $umkmList;
+            $mitraList = $this->mitraRepository->findAll();
+            return $mitraList;
         }catch (\Exception $exception){
             throw new Exception(__('validation.message.something_went_wrong'), 500);
         }catch (AuthorizationException $exception) {
@@ -31,7 +31,7 @@ class UmkmServiceImpl implements UmkmService
         }
     }
 
-    public function postumkmEnrollment(UmkmEnrollmentRequest $request, $user_id)
+    public function postmitraEnrollment(MitraEnrollmentRequest $request, $user_id)
     {
         $validatedData = $request->validated();
         try {
@@ -40,23 +40,25 @@ class UmkmServiceImpl implements UmkmService
             $filenameWithExt = $file->getClientOriginalName();
             $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
             $extension = $file->getClientOriginalExtension();
-            $filenameOriginal = 'entrepreneur/umkm/' . $filename . '_' . time() . '.' . $extension;
+            $filenameOriginal = 'entrepreneur/mitra/' . $filename . '_' . time() . '.' . $extension;
             $path = $file->storeAs('public/' . $filenameOriginal);
             $validatedData['photo_file'] = 'storage/'.$filenameOriginal;
-            $umkm = $this->umkmRepository->save($validatedData);
+            $mitra = $this->mitraRepository->save($validatedData);
         }catch (\Exception $exception){
+            dd($exception->getMessage());
             throw new Exception(__('validation.message.something_went_wrong'), 500);
         }catch (AuthorizationException $exception) {
             throw new Exception('You are not authorized to access', 403);
         }
 
         try {
-            $dataUmkm = [
+            $datamitra = [
                 'user_id' => $user_id,
-                'umkm_id' => $umkm->id
+                'mitra_id' => $mitra->id
             ];
-            $relation = Entrepreneur::create($dataUmkm);
+            $relation = Entrepreneur::create($datamitra);
         }catch (\Exception $exception){
+            dd($exception->getMessage());
             throw new Exception(__('validation.message.something_went_wrong'), 500);
         }catch (AuthorizationException $exception) {
             throw new Exception('You are not authorized to access', 403);
@@ -65,7 +67,7 @@ class UmkmServiceImpl implements UmkmService
         }
 
         $data = [
-            'umkm' => $umkm,
+            'mitra' => $mitra,
             'entrepreneur' => $relation
         ];
 

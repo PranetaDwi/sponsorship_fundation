@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Entrepreneur\Umkm;
+namespace App\Http\Resources\Entrepreneur\Mitra;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UmkmResource extends JsonResource
+class MitraResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

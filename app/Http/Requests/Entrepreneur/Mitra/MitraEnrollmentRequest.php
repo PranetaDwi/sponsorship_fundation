@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Entrepreneur\Umkm;
+namespace App\Http\Requests\Entrepreneur\Mitra;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Traits\ApiResponseValidationException;
 
-class UmkmEnrollmentRequest extends FormRequest
+class MitraEnrollmentRequest extends FormRequest
 {
     use ApiResponseValidationException;
     /**

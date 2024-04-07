@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository\Umkm;
+namespace App\Repository\Mitra;
 
-interface UmkmRepository
+interface MitraRepository
 {
     public function save($data);
 

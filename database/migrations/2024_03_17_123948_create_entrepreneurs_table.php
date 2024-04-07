@@ -15,8 +15,8 @@ return new class extends Migration
             $table->integerIncrements('id');
             $table->unsignedInteger('user_id')->index('user_id')->unique();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedInteger('umkm_id')->index('umkm_id')->unique();
-            $table->foreign('umkm_id')->references('id')->on('umkms')->onDelete('cascade');
+            $table->unsignedInteger('mitra_id')->index('mitra_id')->unique();
+            $table->foreign('mitra_id')->references('id')->on('mitras')->onDelete('cascade');
             $table->timestamps();
         });
     }
