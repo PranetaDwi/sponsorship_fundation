@@ -34,8 +34,18 @@ Route::prefix('v1')->group(function () {
     });
 
     // Endpoint tanpa autentikasi
-    Route::get('/welcome', function () {
-        return 'Welcome to API';
+    Route::prefix('events')->group(function () {
+        // endpoint buat event populer aja yang di home
+        Route::get('/event-populer-overview', [EventController::class, 'eventLists'])->name('api.event-populer-overview');
+        // endpoint buat list eventnya
+
+        // enpoint buat detail eventnya
+
+        // endpoint buat kalo make kategori
+
+        // endpoint kalo make search
+
+
     });
 
     // Mulai menggunakan middleware
