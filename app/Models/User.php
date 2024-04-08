@@ -6,11 +6,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, 
+    HasFactory, 
+    Notifiable;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->account_id = generate_account_id();
+        });
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -18,9 +29,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'account_id',
         'email',
+        'remember_token',
         'password',
+        'email_verified_at',
+        'role',
+        'status',
     ];
 
     /**
@@ -42,4 +57,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function userData()
+    {
+        return $this->hasOne(UserData::class);
+    }
+
+    public function organizer()
+    {
+        return $this->hasOne(Organizer::class, 'user_id', 'id');
+    }
+
+    public function entrepreneur()
+    {
+        return $this->hasOne(Entrepreneur::class);
+    }
 }
