@@ -36,19 +36,16 @@ Route::prefix('v1')->group(function () {
     // Endpoint tanpa autentikasi
     Route::prefix('events')->group(function () {
         // endpoint buat event populer aja yang di home
-        Route::get('/event-populer-overview', [EventController::class, 'eventLists'])->name('api.event-populer-overview');
-        // endpoint buat list eventnya
+        Route::get('/event-populer-overview', [EventController::class, 'getEventPopuler'])->name('api.event-populer-overview');
 
         // endpoint buat semua event
+        Route::get('/event-all-overview', [EventController::class, 'getOverviewEventAll'])->name('api.event-all-overview');
 
         // enpoint buat detail eventnya
+        Route::get('/event-detail/{event_id}', [EventController::class, 'getEventDetail'])->name('api.event-detail');
 
         // endpoint buat kalo make kategori
-
-        // endpoint kalo make search
-
-        // endpoint buat 
-
+        Route::get('/event-category/{category}', [EventController::class, 'getEventByCategory'])->name('api.event-category');
 
     });
 

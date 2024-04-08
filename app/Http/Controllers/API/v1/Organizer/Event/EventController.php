@@ -49,6 +49,43 @@ class EventController extends Controller
         }
     }
 
+    // public function getEventPopuler(){
+    //     try {
+    //         $eventPopuler = $this->eventService->getEventPopuler();
+    //         return new ApiResponse('success',  __('validation.message.loaded'), EventOverviewResource::collection($eventPopuler), 200);
+    //     } catch (\Exception $exception) {
+    //         return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+    //     }
+    // }
+
+    // public function getOverviewEventAll(){
+    //     try {
+    //         $eventAll = $this->eventService->getOverviewEventAll();
+    //         return new ApiResponse('success',  __('validation.message.loaded'), EventOverviewResource::collection($eventAll), 200);
+    //     } catch (\Exception $exception) {
+    //         return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+    //     }
+    // }
+
+    // public function getEventDetail(string $event_id)
+    // {
+    //     try {
+    //         $eventDetail = $this->eventService->getEventDetail($event_id);
+    //         return new ApiResponse('success',  __('validation.message.loaded'), EventDetailResource::collection($eventDetail), 200);
+    //     } catch (\Exception $exception) {
+    //         return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+    //     }
+    // }
+
+    // public function getEventByCategory(string $category){
+    //     try {
+    //         $eventByCategory = $this->eventService->getEventByCategory($category);
+    //         return new ApiResponse('success',  __('validation.message.loaded'), EventPreviewResource::collection($eventByCategory), 200);
+    //     } catch (\Exception $exception) {
+    //         return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+    //     }
+    // }
+
     public function show(string $id)
     {
         //
