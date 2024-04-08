@@ -39,11 +39,15 @@ Route::prefix('v1')->group(function () {
         Route::get('/event-populer-overview', [EventController::class, 'eventLists'])->name('api.event-populer-overview');
         // endpoint buat list eventnya
 
+        // endpoint buat semua event
+
         // enpoint buat detail eventnya
 
         // endpoint buat kalo make kategori
 
         // endpoint kalo make search
+
+        // endpoint buat 
 
 
     });
