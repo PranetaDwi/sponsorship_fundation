@@ -5,6 +5,7 @@ use App\Http\Controllers\API\v1\Auth\RegisterController;
 use App\Http\Controllers\API\v1\Entrepreneur\Mitra\MitraController;
 use App\Http\Controllers\API\v1\Organizer\Organization\OrganizationController;
 use App\Http\Controllers\API\v1\Organizer\Event\EventController;
+use App\Http\Controllers\API\v1\Public\Event\PublicEventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,16 +37,22 @@ Route::prefix('v1')->group(function () {
     // Endpoint tanpa autentikasi
     Route::prefix('events')->group(function () {
         // endpoint buat event populer aja yang di home
-        Route::get('/event-populer-overview', [EventController::class, 'getEventPopuler'])->name('api.event-populer-overview');
+        Route::get('/event-populer-overview', [PublicEventController::class, 'getOverviewEventPopuler'])->name('api.overview-event-populer');
 
         // endpoint buat semua event
-        Route::get('/event-all-overview', [EventController::class, 'getOverviewEventAll'])->name('api.event-all-overview');
+        Route::get('/event-all-overview', [PublicEventController::class, 'getOverviewEventAll'])->name('api.overview-event-all');
 
         // enpoint buat detail eventnya
-        Route::get('/event-detail/{event_id}', [EventController::class, 'getEventDetail'])->name('api.event-detail');
+        Route::get('/event-detail/{event_id}', [PublicEventController::class, 'getEventDetail'])->name('api.event-detail');
 
         // endpoint buat kalo make kategori
-        Route::get('/event-category/{category}', [EventController::class, 'getEventByCategory'])->name('api.event-category');
+        Route::get('/event-category/{category}', [PublicEventController::class, 'getOverviewEventByCategory'])->name('api.overview-event-by-category');
+
+        // endpoint buat kontraprestasi pada detail
+        Route::get('/event-detail/event-kontraprestasi', [PublicEventController::class, 'getKontraprestasiEvent'])->name('api.kontraprestasi-event');
+
+        // endpoint buat list donorship
+        Route::get('/event-detail/event-donorship', [PublicEventController::class, 'getDonorshipEvent'])->name('api.donorship-event');
 
     });
 

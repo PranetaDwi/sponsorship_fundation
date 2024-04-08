@@ -7,7 +7,6 @@ use App\Models\Organizer;
 use App\Repository\Organization\OrganizationRepository;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class OrganizationServiceImpl implements OrganizationService
