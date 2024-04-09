@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->unsignedInteger('organizer_id')->index('organizer_id')->unique();
+            $table->unsignedInteger('organizer_id')->index('organizer_id');
             $table->foreign('organizer_id')->references('id')->on('organizers')->onDelete('cascade');
             $table->string('title', 100);
             $table->text('description');

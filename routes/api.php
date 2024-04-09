@@ -25,7 +25,7 @@ Route::prefix('v1')->group(function () {
         Route::post('/login', [LoginController::class, 'login'])->name('api.login');
         
         // Endpoint untuk registrasi Organizer
-        Route::post('/register', [RegisterController::class, 'organizerRegister'])->name('api.register-organizer');
+        Route::post('/register-organizer', [RegisterController::class, 'organizerRegister'])->name('api.register-organizer');
         Route::post('/organization-enrollment/{user_id}', [OrganizationController::class, 'store'])->name('api.organization-enrollment');
 
         // Endpoint untuk registrasi Entrepreneur

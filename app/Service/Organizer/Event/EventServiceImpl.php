@@ -82,6 +82,7 @@ class EventServiceImpl implements EventService
             $response['event'] = $this->eventRepository->save($eventData);
 
         }catch (\Exception $exception){
+            dd($exception->getMessage());
             throw new Exception(__('validation.message.something_went_wrong'), 500);
         }catch (AuthorizationException $exception) {
             throw new Exception('You are not authorized to access', 403);
@@ -125,6 +126,7 @@ class EventServiceImpl implements EventService
             }
             $response['event_category_name_id'] = $eventCategory;
         } catch (\Exception $exception) {
+            dd($exception->getMessage());
             DB::rollBack();
             throw new Exception('Something went wrong: ' . $exception->getMessage(), 500);
         }

@@ -37,7 +37,8 @@ class CreateNewEventRequest extends FormRequest
             'status_event' => ['required', 'string', 'max:40'],
             'type_event' => ['required', 'string', 'max:40'],
             'event_category_id.*' => ['required', 'integer', 'exists:event_category_names,id'],
-            'photo_file.*' => ['required', 'image','mimes:jpeg,png,jpg', 'max:2048'],
+            'photo_file' => ['required','array', 'max:2048'],
+            // mimes validation for multiple files harus dipikirin lagi
         ];
     }
 }

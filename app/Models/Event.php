@@ -20,7 +20,7 @@ class Event extends Model
 
     public function eventPhotos()
     {
-        return $this->hasMany(EventPhoto::class);
+        return $this->hasMany(EventPhoto::class, 'event_id', 'id');
     }
 
     public function categories()

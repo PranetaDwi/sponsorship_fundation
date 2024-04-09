@@ -20,10 +20,10 @@ class EventOverviewResource extends JsonResource
                 'title' => $this->title,
                 'sponsor_countdown' => $this->donation_deadline,
                 'collected_donor' => $this->target_fund,
-                'total_mitra' => $this->total_mitra,
-                'cover' => $this->cover,
-                'categories' => $this->categories()->map(function ($category) {
-                    return [
+                'total_mitra' => $this->target_participants,
+                'cover' => $this->eventPhotos()->first()->photo_file,
+                'categories' => $this->categories()->get()->map(function ($category) {
+                    return (object) [
                         'id' => $category->id,
                         'title' => $category->name,
                     ];
@@ -36,10 +36,10 @@ class EventOverviewResource extends JsonResource
                 'sponsor_countdown' => $this->donation_deadline,
                 'collected_donor' => $this->target_fund,
                 'total_mitra' => $this->total_mitra,
-                'cover' => $this->cover,
+                'cover' => $this->eventPhotos()->first(),
                 'event_type' => $this->event_type,
-                'categories' => $this->categories()->map(function ($category) {
-                    return [
+                'categories' => $this->categories()->get()->map(function ($category) {
+                    return (object)[
                         'id' => $category->id,
                         'title' => $category->name,
                     ];

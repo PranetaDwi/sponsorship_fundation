@@ -29,6 +29,8 @@ use App\Service\Organizer\Organization\OrganizationService;
 use App\Service\Organizer\Organization\OrganizationServiceImpl;
 use App\Service\Organizer\Event\EventService;
 use App\Service\Organizer\Event\EventServiceImpl;
+use App\Service\Public\Event\PublicEventService;
+use App\Service\Public\Event\PublicEventServiceImpl;
 
 class RepoServiceProvider extends ServiceProvider
 {
@@ -50,6 +52,7 @@ class RepoServiceProvider extends ServiceProvider
         $this->app->bind(MitraService::class, MitraServiceImpl::class);
         $this->app->bind(OrganizationService::class, OrganizationServiceImpl::class);
         $this->app->bind(EventService::class, EventServiceImpl::class);
+        $this->app->bind(PublicEventService::class, PublicEventServiceImpl::class);
     }
 
     /**
