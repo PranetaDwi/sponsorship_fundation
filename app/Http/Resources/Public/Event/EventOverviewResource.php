@@ -22,7 +22,12 @@ class EventOverviewResource extends JsonResource
                 'collected_donor' => $this->target_fund,
                 'total_mitra' => $this->total_mitra,
                 'cover' => $this->cover,
-                // category
+                'categories' => $this->categories()->map(function ($category) {
+                    return [
+                        'id' => $category->id,
+                        'title' => $category->name,
+                    ];
+                }),
             ];
         } elseif($request->route()->getName() === 'api.overview-event-all'){
             return [
@@ -33,7 +38,12 @@ class EventOverviewResource extends JsonResource
                 'total_mitra' => $this->total_mitra,
                 'cover' => $this->cover,
                 'event_type' => $this->event_type,
-                // category
+                'categories' => $this->categories()->map(function ($category) {
+                    return [
+                        'id' => $category->id,
+                        'title' => $category->name,
+                    ];
+                }),
             ];
         }
 

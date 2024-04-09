@@ -13,8 +13,8 @@ class EventCategoryName extends Model
         'name'
     ];
 
-    public function eventCategory()
+    public function events()
     {
-        return $this->hasMany(EventCategory::class);
+        return $this->belongsToMany(Event::class, 'event_categories');
     }
 }
