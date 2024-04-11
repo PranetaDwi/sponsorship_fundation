@@ -19,6 +19,7 @@ class PublicEventServiceImpl implements PublicEventService
 
     public function getOverviewEventPopuler(){
         try{
+            // find-nya harus berdasarkan mitra paling banyak yg donor..... itu di atur lagi nanti di repositorynya..
             return $this->eventRepository->findAll();
         } catch (\Exception $exception){
             throw new Exception(__('validation.message.something_went_wrong'), 500);
@@ -28,7 +29,13 @@ class PublicEventServiceImpl implements PublicEventService
     }
 
     public function getOverviewEventAll(){
-
+        try{
+            return $this->eventRepository->findAll();
+        } catch (\Exception $exception){
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }catch (ModelNotFoundException $exception) {
+            throw new Exception('Model not found', 404);
+        }
     }
 
     public function getEventDetail(string $event_id){
