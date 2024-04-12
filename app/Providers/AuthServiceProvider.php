@@ -23,7 +23,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         Passport::tokensCan([
             'entrepreneur' => 'entrepreneur',
-            'organizer' => 'organizer'
+            'organizer' => 'organizer',
+            'admin' => 'admin',
         ]);
 
         Passport::setDefaultScope([

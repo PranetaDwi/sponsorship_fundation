@@ -81,7 +81,12 @@ Route::prefix('v1')->group(function () {
         Route::middleware(['scopes:entrepreneur'])->group(function () {
             Route::get('/mitra-lists', [MitraController::class, 'index'])->name('api.mitra-lists');
         });
-    
+
+        Route::middleware(['scope:admin'])->group(function () {
+            Route::get('/admin', function () {
+                return 'Welcome to Admin in Dashboard';
+            });
+        });
     });
 });
 
