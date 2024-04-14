@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('icon_kontraprestasis', function (Blueprint $table) {
-            $table->id();
+            $table->integerIncrements('id');
+            $table->unsignedInteger('kontraprestasi_id')->index('kontraprestasi_id');
+            $table->foreign('kontraprestasi_id')->references('id')->on('kontraprestasis')->onDelete('cascade');
+            $table->unsignedInteger('icon_photo_kontraprestasi_id')->index('icon_photo_kontraprestasi_id');
+            $table->foreign('icon_photo_kontraprestasi_id')->references('id')->on('icon_photo_kontraprestasis')->onDelete('cascade');
             $table->timestamps();
         });
     }

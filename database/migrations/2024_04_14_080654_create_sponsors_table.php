@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sponsors', function (Blueprint $table) {
-            $table->id();
+            $table->integerIncrements('id');
+            $table->unsignedInteger('event_id')->index('event_id');
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->unsignedBigInteger('amount');
+            $table->unsignedInteger('entrepreneur_id')->index('entrepreneur_id');
+            $table->foreign('entrepreneur_id')->references('id')->on('entrepreneurs')->onDelete('cascade');
             $table->timestamps();
         });
     }

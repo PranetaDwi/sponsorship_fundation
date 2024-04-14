@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kontraprestasis', function (Blueprint $table) {
-            $table->id();
+            $table->integerIncrements('id');
+            $table->unsignedInteger('event_id')->index('event_id');
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->unsignedBigInteger('min_sponsor');
+            $table->unsignedBigInteger('max_sponsor');
+            $table->text('feedback');
+            $table->string('icon', 50)->nullable();
             $table->timestamps();
         });
     }

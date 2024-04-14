@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('event_photos', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->unsignedInteger('event_id')->index('event_id')->unique();
+            $table->unsignedInteger('event_id')->index('event_id');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->string('photo_file', 191);
             $table->timestamps();

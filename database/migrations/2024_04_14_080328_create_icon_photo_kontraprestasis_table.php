@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('icon_photo_kontraprestasis', function (Blueprint $table) {
-            $table->id();
+            $table->integerIncrements('id');
+            $table->string('photo_file', 191);
             $table->timestamps();
         });
     }

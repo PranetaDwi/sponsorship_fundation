@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\PartisipantCategoryName;
+use App\Models\ParticipantCategoryName;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,10 +13,10 @@ class ParticipantCategoryNameSeeder extends Seeder
      */
     public function run(): void
     {
-        PartisipantCategoryName::create(['name' => 'Mahasiswa']);
-        PartisipantCategoryName::create(['name' => 'Umum']);
-        PartisipantCategoryName::create(['name' => 'Masyarakat']);
-        PartisipantCategoryName::create(['name' => 'Pelajar']);
-        PartisipantCategoryName::create(['name' => 'Pekerja']);
+        ParticipantCategoryName::create(['name' => 'Mahasiswa']);
+        ParticipantCategoryName::create(['name' => 'Umum']);
+        ParticipantCategoryName::create(['name' => 'Masyarakat']);
+        ParticipantCategoryName::create(['name' => 'Pelajar']);
+        ParticipantCategoryName::create(['name' => 'Pekerja']);
     }
 }

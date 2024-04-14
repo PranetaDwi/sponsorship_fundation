@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kontraprestasi_evidences_', function (Blueprint $table) {
-            $table->id();
+            $table->integerIncrements('id');
+            $table->unsignedInteger('sponsor_id')->index('sponsor_id');
+            $table->foreign('sponsor_id')->references('id')->on('sponsors')->onDelete('cascade');
+            $table->string('photo_file', 191)->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
