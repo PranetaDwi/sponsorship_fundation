@@ -7,7 +7,7 @@ use App\Repository\EventPlacement\EventPlacementRepository;
 
 class EventPlacementRepositoryImpl implements EventPlacementRepository
 {
-    public function save($data, $event_id)
+    public function save($data)
     {
         return EventPlacement::create($data);
     }

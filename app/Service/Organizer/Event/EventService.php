@@ -22,10 +22,4 @@ interface EventService
 
     public function postKontraprestasi(CreateEventKontraprestasiRequest $request, $event_id);
 
-    public function editEvents(string $id);
-
-    public function addEventProof(string $id);
-
-    public function deleteEvent(string $id);
-
 }

@@ -78,12 +78,7 @@ class EventServiceImpl implements EventService
     // 'description' => $request->description,
     // 'target_fund' => $request->target_fund,
     // 'sponsor_deadline' => $request->sponsor_deadline,
-    // 'event_start_date' => $request->event_start_date,
-    // 'event_end_date' => $request->event_end_date,
-    // 'event_venue' => $request->event_venue,
-    // 'address' => $request->address,
-    // 'city' => $request->city,
-    // 'province' => $request->province,
+
     // 'target_participants' => $request->target_participants,
     // 'participant_description' => $request->participant_description,
     // 'status_event' => $request->status_event,
@@ -159,27 +154,54 @@ class EventServiceImpl implements EventService
     }
 
     public function postEventFund(CreateEventFundRequest $request, $event_id){
+        $response = [];
+        try {
+            $eventFund = [
+                'event_id' => $event_id,
+                'target_fund' => $request->target_fund,
+                'sponsor_deadline' => $request->sponsor_deadline,
+            ];
+
+            $response['event'] = $this->eventFundRepository->save($eventFund);
+
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }catch (AuthorizationException $exception) {
+            throw new Exception('You are not authorized to access', 403);
+        }
+
+        return $response;
 
     }
 
     public function postEventPlacement(CreateEventPlacementRequest $request, $event_id){
+        $response = [];
+        try {
+            $eventPlacement = [
+                'event_id' => $event_id,
+                'event_start_date' => $request->event_start_date,
+                'event_end_date' => $request->event_end_date,
+                'event_venue' => $request->event_venue,
+                'address' => $request->address,
+                'city' => $request->city,
+                'province' => $request->province,
+            ];
 
+            $response['event'] = $this->eventPlacementRepository->save($eventPlacement);
+
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }catch (AuthorizationException $exception) {
+            throw new Exception('You are not authorized to access', 403);
+        }
+
+        return $response;
     }
 
     public function postKontraprestasi(CreateEventKontraprestasiRequest $request, $event_id){
-
+        
     }
 
-
-    public function editEvents(string $id){
-
-    }
-
-    public function addEventProof(string $id){
-
-    }
-
-    public function deleteEvent(string $id){
-
-    }
 }

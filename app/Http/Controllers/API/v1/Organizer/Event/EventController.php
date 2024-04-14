@@ -9,7 +9,6 @@ use App\Http\Requests\Organizer\Event\CreateEventKontraprestasiRequest;
 use App\Http\Requests\Organizer\Event\CreateEventPlacementRequest;
 use App\Http\Resources\Organizer\Event\EventCategoriesResource;
 use App\Http\Resources\Organizer\Event\EventPreviewResource;
-use Illuminate\Http\Request;
 use App\Service\Organizer\Event\EventService;
 use App\Http\Responses\ApiResponse;
 
@@ -79,23 +78,4 @@ class EventController extends Controller
         }
     }   
 
-    public function show(string $id)
-    {
-        //
-    }
-
-    public function edit(string $id)
-    {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
-    }
 }

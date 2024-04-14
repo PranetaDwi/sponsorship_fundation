@@ -30,6 +30,7 @@ class CreateEventKontraprestasiRequest extends FormRequest
             'min_sponsor' => ['required', 'integer'],
             'max_sponsor' => ['required', 'integer'],
             'feedback' => ['required', 'string', 'max:500'],
+            
         ];
     }
 }

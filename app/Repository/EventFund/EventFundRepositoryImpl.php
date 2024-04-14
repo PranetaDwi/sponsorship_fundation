@@ -6,7 +6,7 @@ use App\Models\EventFund;
 
 class EventFundRepositoryImpl implements EventFundRepository
 {
-    public function save($data, $event_id)
+    public function save($data)
     {
         return EventFund::create($data);
     }
