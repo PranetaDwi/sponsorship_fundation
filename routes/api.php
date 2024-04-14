@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\v1\Admin\IconManagement\IconManagementController;
 use App\Http\Controllers\API\v1\Auth\LoginController;
 use App\Http\Controllers\API\v1\Auth\RegisterController;
 use App\Http\Controllers\API\v1\Entrepreneur\Mitra\MitraController;
@@ -80,8 +81,10 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::middleware(['scope:admin'])->group(function () {
-            Route::get('/admin', function () {
-                return 'Welcome to Admin in Dashboard';
+            
+            Route::prefix('managemen-icon-kontraprestasi')->group(function () {
+                Route::get('list-icon-kontraprestasi', [IconManagementController::class, 'getIconKontraprestasi'])->name('api.list-icon-kontraprestasi');
+                Route::post('post-icon-kontraprestasi', [IconManagementController::class, 'postIconKontraprestasi'])->name('api.list-icon-kontraprestasi');
             });
         });
     });

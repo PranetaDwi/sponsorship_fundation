@@ -73,17 +73,6 @@ class EventServiceImpl implements EventService
         }
     }
 
-    // 'organizer_id' => auth()->user()->organizer->id,
-    // 'title' => $request->title,
-    // 'description' => $request->description,
-    // 'target_fund' => $request->target_fund,
-    // 'sponsor_deadline' => $request->sponsor_deadline,
-
-    // 'target_participants' => $request->target_participants,
-    // 'participant_description' => $request->participant_description,
-    // 'status_event' => $request->status_event,
-    // 'type_event' => $request->type_event,
-
     public function postEventInformation(CreateEventInformationRequest $request){
         $response = [];
         try {
