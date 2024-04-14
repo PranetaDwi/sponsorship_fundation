@@ -10,6 +10,6 @@ class Kontraprestasi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'event_id', 'min_sponsor', 'max_sponsor', 'feedback'
+        'event_id', 'icon_photo_kontraprestasi_id', 'title', 'min_sponsor', 'max_sponsor', 'feedback'
     ];
 }

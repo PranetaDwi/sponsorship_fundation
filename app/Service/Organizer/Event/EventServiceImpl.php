@@ -190,7 +190,26 @@ class EventServiceImpl implements EventService
     }
 
     public function postKontraprestasi(CreateEventKontraprestasiRequest $request, $event_id){
-        
+        $response = [];
+        try {
+            $eventKontraprestasi = [
+                'event_id' => $event_id,
+                'title' => $request->title,
+                'min_sponsor' => $request->min_sponsor,
+                'max_sponsor' => $request->max_sponsor,
+                'feedback' => $request->feedback,
+                'icon_photo_kontraprestasi_id' => $request->icon_photo_kontraprestasi_id,
+            ];
+
+            $response['kontraprestasi'] = $this->kontraprestasiRepository->save($eventKontraprestasi);
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }catch (AuthorizationException $exception) {
+            throw new Exception('You are not authorized to access', 403);
+        }
+
+        return $response;
     }
 
 }

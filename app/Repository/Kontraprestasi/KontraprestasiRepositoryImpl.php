@@ -6,7 +6,7 @@ use App\Models\Kontraprestasi;
 
 class KontraprestasiRepositoryImpl implements KontraprestasiRepository
 {
-    public function save($data, $event_id)
+    public function save($data)
     {
         return Kontraprestasi::create($data);
 

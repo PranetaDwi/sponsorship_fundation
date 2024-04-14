@@ -80,11 +80,17 @@ Route::prefix('v1')->group(function () {
             Route::get('/mitra-lists', [MitraController::class, 'index'])->name('api.mitra-lists');
         });
 
-        Route::middleware(['scope:admin'])->group(function () {
-            
+        // Untuk user admin
+        Route::middleware(['scopes:admin'])->group(function () {
             Route::prefix('managemen-icon-kontraprestasi')->group(function () {
-                Route::get('list-icon-kontraprestasi', [IconManagementController::class, 'getIconKontraprestasi'])->name('api.list-icon-kontraprestasi');
                 Route::post('post-icon-kontraprestasi', [IconManagementController::class, 'postIconKontraprestasi'])->name('api.list-icon-kontraprestasi');
+            });
+        });
+
+        // Untuk user admin dan organizer
+        Route::middleware(['scope:admin,organizer'])->group(function () {
+            Route::prefix('icon-kontraprestasi')->group(function () {
+                Route::get('list-icon-kontraprestasi', [IconManagementController::class, 'getIconKontraprestasi'])->name('api.list-icon-kontraprestasi');
             });
         });
     });

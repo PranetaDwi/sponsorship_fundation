@@ -30,7 +30,7 @@ class CreateEventKontraprestasiRequest extends FormRequest
             'min_sponsor' => ['required', 'integer'],
             'max_sponsor' => ['required', 'integer'],
             'feedback' => ['required', 'string', 'max:500'],
-            
+            'icon_photo_kontraprestasi_id' => ['required', 'integer', 'exists:icon_photo_kontraprestasis,id'],
         ];
     }
 }

@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('icon_kontraprestasis', function (Blueprint $table) {
+        Schema::create('kontraprestasis', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->unsignedInteger('kontraprestasi_id')->index('kontraprestasi_id');
-            $table->foreign('kontraprestasi_id')->references('id')->on('kontraprestasis')->onDelete('cascade');
+            $table->unsignedInteger('event_id')->index('event_id');
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->unsignedInteger('icon_photo_kontraprestasi_id')->index('icon_photo_kontraprestasi_id');
             $table->foreign('icon_photo_kontraprestasi_id')->references('id')->on('icon_photo_kontraprestasis')->onDelete('cascade');
+            $table->string('title', 100);
+            $table->unsignedBigInteger('min_sponsor');
+            $table->unsignedBigInteger('max_sponsor');
+            $table->text('feedback');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('icon_kontraprestasis');
+        Schema::dropIfExists('kontraprestasis');
     }
 };
