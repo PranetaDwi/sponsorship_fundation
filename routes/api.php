@@ -66,10 +66,10 @@ Route::prefix('v1')->group(function () {
 
                 // Endpoint untuk membuat event baru
                 Route::prefix('create-event')->group(function () {
-                    Route::get('/post-event-information', [EventController::class, 'postEventInformation'])->name('api.post-event-information');
-                    Route::get('/post-event-fund/{event_id}', [EventController::class, 'postEventFund'])->name('api.post-event-fund');
-                    Route::get('/post-event-placement/{event_id}', [EventController::class, 'postEventPlacement'])->name('api.post-event-placement');
-                    Route::get('/post-kontraprestasi/{event_id}', [EventController::class, 'postKontraprestasi'])->name('api.post-kontraprestasi');
+                    Route::post('/post-event-information', [EventController::class, 'postEventInformation'])->name('api.post-event-information');
+                    Route::post('/post-event-fund/{event_id}', [EventController::class, 'postEventFund'])->name('api.post-event-fund');
+                    Route::post('/post-event-placement/{event_id}', [EventController::class, 'postEventPlacement'])->name('api.post-event-placement');
+                    Route::post('/post-kontraprestasi/{event_id}', [EventController::class, 'postKontraprestasi'])->name('api.post-kontraprestasi');
                 });
             });
         });

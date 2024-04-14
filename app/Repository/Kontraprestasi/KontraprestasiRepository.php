@@ -2,7 +2,8 @@
 
 namespace App\Repository\Kontraprestasi;
 
-interface KontraptrestasiRepository
+interface KontraprestasiRepository
 {
     public function save($data, $event_id);
+
 }

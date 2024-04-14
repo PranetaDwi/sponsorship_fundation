@@ -27,12 +27,13 @@ class CreateEventInformationRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'type_event' => ['required', 'string', 'max:40'],
-            'status_event' => ['required', 'string', 'max:40'],
+            'type_event' => ['required', 'string', 'max:40', 'in:offline,online'],
+            'status_event' => ['required', 'string', 'max:40', 'in:publish,unpublish'],
             'description' => ['required'],
             'target_participants' => ['required', 'integer'],
             'participant_description' => ['required'],
             'photo_file' => ['required','array', 'max:2048'],
+            'event_category_id.*' => ['required', 'integer', 'exists:event_category_names,id'],
         ];
     }
 }

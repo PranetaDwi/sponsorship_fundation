@@ -2,11 +2,17 @@
 
 namespace App\Service\Organizer\Event;
 
-use App\Http\Requests\Organizer\Event\CreateNewEventRequest;
+use App\Http\Requests\Organizer\Event\CreateEventFundRequest;
+use App\Http\Requests\Organizer\Event\CreateEventInformationRequest;
+use App\Http\Requests\Organizer\Event\CreateEventKontraprestasiRequest;
+use App\Http\Requests\Organizer\Event\CreateEventPlacementRequest;
 use App\Repository\EventPhoto\EventPhotoRepository;
 use App\Repository\Event\EventRepository;
 use App\Repository\EventCategoryName\EventCategoryNameRepository;
 use App\Repository\EventCategory\EventCategoryRepository;
+use App\Repository\EventFund\EventFundRepository;
+use App\Repository\EventPlacement\EventPlacementRepository;
+use App\Repository\Kontraprestasi\KontraprestasiRepository;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -18,20 +24,30 @@ class EventServiceImpl implements EventService
     protected $eventCategoryRepository;
     protected $eventCategoryNameRepository;
     protected $eventPhotoRepository;
+    protected $eventFundRepository;
+    protected $eventPlacementRepository;
+    protected $kontraprestasiRepository;
 
 
     public function __construct(
         EventRepository $eventRepository, 
         EventCategoryRepository $eventCategoryRepository, 
         EventCategoryNameRepository $eventCategoryNameRepository, 
-        EventPhotoRepository $eventPhotoRepository)
+        EventPhotoRepository $eventPhotoRepository,
+        EventFundRepository $eventFundRepository,
+        EventPlacementRepository $eventPlacementRepository,
+        KontraprestasiRepository $kontraprestasiRepository)
     {
         $this->eventRepository = $eventRepository;
         $this->eventCategoryRepository = $eventCategoryRepository;
         $this->eventCategoryNameRepository = $eventCategoryNameRepository;
         $this->eventPhotoRepository = $eventPhotoRepository;
+        $this->eventFundRepository = $eventFundRepository;
+        $this->eventPlacementRepository = $eventPlacementRepository;
+        $this->kontraprestasiRepository = $kontraprestasiRepository;
     }
     
+    // diatur ulang lagi buset ya
     public function getMyEvents(){
         try{
             return $this->eventRepository->findByOrganizerId(auth()->user()->organizer->id);
@@ -57,29 +73,37 @@ class EventServiceImpl implements EventService
         }
     }
 
-    public function postEvents(CreateNewEventRequest $request){
-        DB::beginTransaction();
+    // 'organizer_id' => auth()->user()->organizer->id,
+    // 'title' => $request->title,
+    // 'description' => $request->description,
+    // 'target_fund' => $request->target_fund,
+    // 'sponsor_deadline' => $request->sponsor_deadline,
+    // 'event_start_date' => $request->event_start_date,
+    // 'event_end_date' => $request->event_end_date,
+    // 'event_venue' => $request->event_venue,
+    // 'address' => $request->address,
+    // 'city' => $request->city,
+    // 'province' => $request->province,
+    // 'target_participants' => $request->target_participants,
+    // 'participant_description' => $request->participant_description,
+    // 'status_event' => $request->status_event,
+    // 'type_event' => $request->type_event,
+
+    public function postEventInformation(CreateEventInformationRequest $request){
         $response = [];
         try {
-            $eventData = [
+            
+            $eventInformation = [
                 'organizer_id' => auth()->user()->organizer->id,
                 'title' => $request->title,
                 'description' => $request->description,
-                'target_fund' => $request->target_fund,
-                'sponsor_deadline' => $request->sponsor_deadline,
-                'event_start_date' => $request->event_start_date,
-                'event_end_date' => $request->event_end_date,
-                'event_venue' => $request->event_venue,
-                'address' => $request->address,
-                'city' => $request->city,
-                'province' => $request->province,
                 'target_participants' => $request->target_participants,
                 'participant_description' => $request->participant_description,
                 'status_event' => $request->status_event,
                 'type_event' => $request->type_event,
             ];
 
-            $response['event'] = $this->eventRepository->save($eventData);
+            $response['event'] = $this->eventRepository->save($eventInformation);
 
         }catch (\Exception $exception){
             dd($exception->getMessage());
@@ -131,25 +155,21 @@ class EventServiceImpl implements EventService
             throw new Exception('Something went wrong: ' . $exception->getMessage(), 500);
         }
 
-        DB::commit();
-        return $response;  
+        return $response;
     }
 
-    public function postEventInformation(){
-
-    }
-
-    public function postEventFund($event_id){
+    public function postEventFund(CreateEventFundRequest $request, $event_id){
 
     }
 
-    public function postEventPlacement($event_id){
+    public function postEventPlacement(CreateEventPlacementRequest $request, $event_id){
 
     }
 
-    public function postKontraprestasi($event_id){
+    public function postKontraprestasi(CreateEventKontraprestasiRequest $request, $event_id){
 
     }
+
 
     public function editEvents(string $id){
 

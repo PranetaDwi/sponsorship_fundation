@@ -7,7 +7,6 @@ use App\Http\Requests\Organizer\Event\CreateEventFundRequest;
 use App\Http\Requests\Organizer\Event\CreateEventInformationRequest;
 use App\Http\Requests\Organizer\Event\CreateEventKontraprestasiRequest;
 use App\Http\Requests\Organizer\Event\CreateEventPlacementRequest;
-use App\Http\Requests\Organizer\Event\CreateNewEventRequest;
 use App\Http\Resources\Organizer\Event\EventCategoriesResource;
 use App\Http\Resources\Organizer\Event\EventPreviewResource;
 use Illuminate\Http\Request;
@@ -39,15 +38,6 @@ class EventController extends Controller
         try {
             $eventCategories = $this->eventService->getEventCategories();
             return new ApiResponse('success',  __('validation.message.loaded'), EventCategoriesResource::collection($eventCategories), 200);
-        } catch (\Exception $exception) {
-            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
-        }
-    }
-
-    public function store(CreateNewEventRequest $request)
-    {
-        try {
-            return new ApiResponse('success',  __('validation.message.created'), $this->eventService->postEvents($request), 200);
         } catch (\Exception $exception) {
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }

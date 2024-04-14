@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Repository\KontraprestasiRepository;
+namespace App\Repository\Kontraprestasi;
 
 use App\Models\Kontraprestasi;
-use App\Repository\Kontraprestasi\KontraptrestasiRepository;
 
-class KontraprestasiRepositoryImpl implements KontraptrestasiRepository
+class KontraprestasiRepositoryImpl implements KontraprestasiRepository
 {
     public function save($data, $event_id)
     {
         return Kontraprestasi::create($data);
+
     }
+
 }

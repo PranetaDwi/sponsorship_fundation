@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repository\EventPlacementRepository;
+namespace App\Repository\EventPlacement;
 
 use App\Models\EventPlacement;
-use App\Repository\EventPlaceementRepository\EventPlacementRepository;
+use App\Repository\EventPlacement\EventPlacementRepository;
 
 class EventPlacementRepositoryImpl implements EventPlacementRepository
 {

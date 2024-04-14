@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository\EventPlaceementRepository;
+namespace App\Repository\EventPlacement;
 
 interface EventPlacementRepository
 {

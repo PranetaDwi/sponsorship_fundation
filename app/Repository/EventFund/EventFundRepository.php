@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository\EventFundRepository;
+namespace App\Repository\EventFund;
 
 interface EventFundRepository
 {
