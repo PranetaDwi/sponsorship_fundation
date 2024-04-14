@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Sponsor extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'event_id', 'amount', 'entrepreneur_id'
+    ];
 }

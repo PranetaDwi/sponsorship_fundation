@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class EventFund extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'event_id', 'target_fund', 'sponsor_deadline'
+    ];
 }

@@ -9,5 +9,5 @@ class ParticipantCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['event_id', 'partisipant_category_name_id'];
+    protected $fillable = ['event_id', 'participant_category_name_id'];
 }

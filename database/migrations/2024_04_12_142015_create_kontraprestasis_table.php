@@ -18,7 +18,6 @@ return new class extends Migration
             $table->unsignedBigInteger('min_sponsor');
             $table->unsignedBigInteger('max_sponsor');
             $table->text('feedback');
-            $table->string('icon', 50)->nullable();
             $table->timestamps();
         });
     }
