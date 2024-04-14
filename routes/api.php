@@ -38,20 +38,10 @@ Route::prefix('v1')->group(function () {
     Route::prefix('events')->group(function () {
         // endpoint buat event populer aja yang di home
         Route::get('/event-populer-overview', [PublicEventController::class, 'getOverviewEventPopuler'])->name('api.overview-event-populer');
-
-        // endpoint buat semua event
         Route::get('/event-all-overview', [PublicEventController::class, 'getOverviewEventAll'])->name('api.overview-event-all');
-
-        // enpoint buat detail eventnya
         Route::get('/event-detail/{event_id}', [PublicEventController::class, 'getEventDetail'])->name('api.event-detail');
-
-        // endpoint buat kalo make kategori
         Route::get('/event-category/{category}', [PublicEventController::class, 'getOverviewEventByCategory'])->name('api.overview-event-by-category');
-
-        // endpoint buat kontraprestasi pada detail
         Route::get('/event-detail/event-kontraprestasi', [PublicEventController::class, 'getKontraprestasiEvent'])->name('api.kontraprestasi-event');
-
-        // endpoint buat list donorship
         Route::get('/event-detail/event-donorship', [PublicEventController::class, 'getDonorshipEvent'])->name('api.donorship-event');
 
     });
@@ -73,7 +63,14 @@ Route::prefix('v1')->group(function () {
             Route::prefix('events')->group(function () {
                 Route::get('event-categories', [EventController::class, 'eventCategories'])->name('api.event-categories');
                 Route::get('/my-event-lists', [EventController::class, 'index'])->name('api.my-event-lists');
-                Route::post('/create', [EventController::class, 'store'])->name('api.event-create');
+
+                // Endpoint untuk membuat event baru
+                Route::prefix('create-event')->group(function () {
+                    Route::get('/post-event-information', [EventController::class, 'postEventInformation'])->name('api.post-event-information');
+                    Route::get('/post-event-fund/{event_id}', [EventController::class, 'postEventFund'])->name('api.post-event-fund');
+                    Route::get('/post-event-placement/{event_id}', [EventController::class, 'postEventPlacement'])->name('api.post-event-placement');
+                    Route::get('/post-kontraprestasi/{event_id}', [EventController::class, 'postKontraprestasi'])->name('api.post-kontraprestasi');
+                });
             });
         });
     

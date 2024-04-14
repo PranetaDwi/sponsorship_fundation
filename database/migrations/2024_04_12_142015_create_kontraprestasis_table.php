@@ -15,6 +15,7 @@ return new class extends Migration
             $table->integerIncrements('id');
             $table->unsignedInteger('event_id')->index('event_id');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->string('title');
             $table->unsignedBigInteger('min_sponsor');
             $table->unsignedBigInteger('max_sponsor');
             $table->text('feedback');

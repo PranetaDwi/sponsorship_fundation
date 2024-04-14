@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\API\v1\Organizer\Event;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Organizer\Event\CreateEventFundRequest;
+use App\Http\Requests\Organizer\Event\CreateEventInformationRequest;
+use App\Http\Requests\Organizer\Event\CreateEventKontraprestasiRequest;
+use App\Http\Requests\Organizer\Event\CreateEventPlacementRequest;
 use App\Http\Requests\Organizer\Event\CreateNewEventRequest;
 use App\Http\Resources\Organizer\Event\EventCategoriesResource;
 use App\Http\Resources\Organizer\Event\EventPreviewResource;
@@ -48,6 +52,42 @@ class EventController extends Controller
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }
     }
+
+    public function postEventInformation(CreateEventInformationRequest $request)
+    {
+        try {
+            return new ApiResponse('success',  __('validation.message.created'), $this->eventService->postEventInformation($request), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
+    public function postEventFund(CreateEventFundRequest $request, $event_id)
+    {
+        try {
+            return new ApiResponse('success',  __('validation.message.created'), $this->eventService->postEventFund($request, $event_id), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
+    public function postEventPlacement(CreateEventPlacementRequest $request, $event_id)
+    {
+        try {
+            return new ApiResponse('success',  __('validation.message.created'), $this->eventService->postEventPlacement($request, $event_id), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
+    public function postKontraprestasi(CreateEventKontraprestasiRequest $request, $event_id)
+    {
+        try {
+            return new ApiResponse('success',  __('validation.message.created'), $this->eventService->postKontraprestasi($request, $event_id), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }   
 
     public function show(string $id)
     {

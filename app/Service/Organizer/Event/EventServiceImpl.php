@@ -135,6 +135,22 @@ class EventServiceImpl implements EventService
         return $response;  
     }
 
+    public function postEventInformation(){
+
+    }
+
+    public function postEventFund($event_id){
+
+    }
+
+    public function postEventPlacement($event_id){
+
+    }
+
+    public function postKontraprestasi($event_id){
+
+    }
+
     public function editEvents(string $id){
 
     }

@@ -12,6 +12,14 @@ interface EventService
 
     public function postEvents(CreateNewEventRequest $request);
 
+    public function postEventInformation();
+
+    public function postEventFund($event_id);
+
+    public function postEventPlacement($event_id);
+
+    public function postKontraprestasi($event_id);
+
     public function editEvents(string $id);
 
     public function addEventProof(string $id);
