@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kontraprestasi_evidences_', function (Blueprint $table) {
+        Schema::create('kontraprestasi_evidences', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('sponsor_id')->index('sponsor_id');
             $table->foreign('sponsor_id')->references('id')->on('sponsors')->onDelete('cascade');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kontraprestasi_evidences_');
+        Schema::dropIfExists('kontraprestasi_evidences');
     }
 };
