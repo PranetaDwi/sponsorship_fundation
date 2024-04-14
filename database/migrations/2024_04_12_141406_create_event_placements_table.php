@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookmarks', function (Blueprint $table) {
+        Schema::create('event_placements', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->unsignedInteger('event_id')->index('event_id')->unique();
+            $table->unsignedInteger('event_id')->index('event_id');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
-            $table->unsignedInteger('entrepreneur_id')->index('entrepreneur_id')->unique();
-            $table->foreign('entrepreneur_id')->references('id')->on('entrepreneurs')->onDelete('cascade');
+            $table->date('event_start_date');
+            $table->date('event_end_date');
+            $table->string('event_venue', 200);
+            $table->text('address');
+            $table->string('city', 100);
+            $table->string('province', 100);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookmarks');
+        Schema::dropIfExists('event_placements');
     }
 };

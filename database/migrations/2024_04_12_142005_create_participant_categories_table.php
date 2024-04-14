@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kontraprestasis', function (Blueprint $table) {
+        Schema::create('participant_categories', function (Blueprint $table) {
             $table->integerIncrements('id');
             $table->unsignedInteger('event_id')->index('event_id');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
-            $table->unsignedBigInteger('min_sponsor');
-            $table->unsignedBigInteger('max_sponsor');
-            $table->text('feedback');
-            $table->string('icon', 50)->nullable();
+            $table->unsignedInteger('partisipant_category_name_id')->index('partisipant_category_name_id');
+            $table->foreign('partisipant_category_name_id')->references('id')->on('partisipant_category_names')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kontraprestasis');
+        Schema::dropIfExists('participant_categories');
     }
 };

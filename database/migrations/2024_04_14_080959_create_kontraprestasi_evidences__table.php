@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('partisipant_category_names', function (Blueprint $table) {
-            $table->integerIncrements('id');
-            $table->string('name', 50);
+        Schema::create('kontraprestasi_evidences_', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -23,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('partisipant_category_names');
+        Schema::dropIfExists('kontraprestasi_evidences_');
     }
 };

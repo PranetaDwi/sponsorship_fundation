@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('proof_kontraprestasi_photos', function (Blueprint $table) {
+        Schema::create('event_funds', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->unsignedInteger('sponsor_id')->index('sponsor_id');
-            $table->foreign('sponsor_id')->references('id')->on('sponsors')->onDelete('cascade');
-            $table->string('photo_file', 191)->nullable();
-            $table->text('description')->nullable();
+            $table->unsignedInteger('event_id')->index('event_id');
+            $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+            $table->unsignedBigInteger('target_fund');
+            $table->date('sponsor_deadline');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('proof_kontraprestasi_photos');
+        Schema::dropIfExists('event_funds');
     }
 };
