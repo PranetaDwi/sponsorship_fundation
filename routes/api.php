@@ -39,11 +39,12 @@ Route::prefix('v1')->group(function () {
     Route::prefix('events')->group(function () {
         Route::get('/event-populer-overview', [PublicEventController::class, 'getOverviewEventPopuler'])->name('api.overview-event-populer');
         Route::get('/event-all-overview', [PublicEventController::class, 'getOverviewEventAll'])->name('api.overview-event-all');
-        Route::get('/event-detail/{event_id}', [PublicEventController::class, 'getEventDetail'])->name('api.event-detail');
         Route::get('/event-category/{category}', [PublicEventController::class, 'getOverviewEventByCategory'])->name('api.overview-event-by-category');
-        Route::get('/event-detail/event-kontraprestasi', [PublicEventController::class, 'getKontraprestasiEvent'])->name('api.kontraprestasi-event');
-        Route::get('/event-detail/event-donorship', [PublicEventController::class, 'getDonorshipEvent'])->name('api.donorship-event');
-
+        // Buat detail event bakal dibagi jadi 3 endpoint utama
+        Route::get('/event-detail/{event_id}/detail-information', [PublicEventController::class, 'getDetailEventInformation'])->name('api.detail-event-information');
+        Route::get('/event-detail/{event_id}/list-kontraprestasi', [PublicEventController::class, 'getListEventKontraprestasi'])->name('api.list-event-kontraprestasi');
+        Route::get('/event-detail/{event_id}/list-kontraprestasi/{id}', [PublicEventController::class, 'getDetailEventKontraprestasi'])->name('api.detail-event-kontraprestasi');
+        Route::get('/event-detail/{event_id}/list-Mitra', [PublicEventController::class, 'getListEventMitra'])->name('api.list-event-Mitra');
     });
 
     // Mulai menggunakan middleware

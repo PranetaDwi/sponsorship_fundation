@@ -12,4 +12,8 @@ class Organization extends Model
     protected $fillable = [
         'name', 'description', 'address', 'city', 'province', 'photo_file'
     ];
+
+    public function organizers(){
+        return $this->hasMany(Organizer::class, 'organization_id', 'id');
+    }
 }

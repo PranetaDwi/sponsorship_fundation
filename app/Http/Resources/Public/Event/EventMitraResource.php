@@ -5,7 +5,7 @@ namespace App\Http\Resources\Public\Event;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EventDetailResource extends JsonResource
+class EventMitraResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API\v1\Public\Event;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Public\Event\EventDetailResource;
+use App\Http\Resources\Public\Event\EventInformationResource;
+use App\Http\Resources\Public\Event\EventKontraprestasiResource;
+use App\Http\Resources\Public\Event\EventMitraResource;
 use App\Http\Resources\Public\Event\EventOverviewResource;
 use App\Http\Responses\ApiResponse;
 use App\Service\Public\Event\PublicEventService;
@@ -35,17 +37,7 @@ class PublicEventController extends Controller
         }
     }
 
-    public function getEventDetail(string $event_id)
-    {
-        try {
-            $eventDetail = $this->publicEventService->getEventDetail($event_id);
-            return new ApiResponse('success',  __('validation.message.loaded'), new EventDetailResource($eventDetail), 200);
-        } catch (\Exception $exception) {
-            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
-        }
-    }
-
-    public function getOverviewEventByCategory(string $category){
+    public function getOverviewEventByCategory($category){
         try {
             $eventByCategory = $this->publicEventService->getOverviewEventByCategory($category);
             return new ApiResponse('success',  __('validation.message.loaded'), EventOverviewResource::collection($eventByCategory), 200);
@@ -53,4 +45,45 @@ class PublicEventController extends Controller
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }
     }
+
+    public function getDetailEventInformation($event_id)
+    {
+        try {
+            $eventDetail = $this->publicEventService->getDetailEventInformation($event_id);
+            return new ApiResponse('success',  __('validation.message.loaded'), new EventInformationResource($eventDetail), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
+    public function getListEventKontraprestasi($event_id)
+    {
+        try {
+            $listKontraprestasi = $this->publicEventService->getListEventKontraprestasi($event_id);
+            return new ApiResponse('success',  __('validation.message.loaded'), EventKontraprestasiResource::collection($listKontraprestasi), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
+    public function getDetailEventKontraprestasi($event_id, $id)
+    {
+        try {
+            $eventKontraprestasiDetail = $this->publicEventService->getDetailEventKontraprestasi($event_id, $id);
+            return new ApiResponse('success',  __('validation.message.loaded'), new EventKontraprestasiResource($eventKontraprestasiDetail), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
+    public function getListEventMitra($event_id)
+    {
+        try {
+            $eventDetail = $this->publicEventService->getListEventMitra($event_id);
+            return new ApiResponse('success',  __('validation.message.loaded'), new EventMitraResource($eventDetail), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
 }

@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('participant_category_names', function (Blueprint $table) {
-            $table->integerIncrements('id');
-            $table->string('name', 50);
-            $table->timestamps();
-        });
+        // Schema::create('participant_category_names', function (Blueprint $table) {
+        //     $table->integerIncrements('id');
+        //     $table->string('name', 50);
+        //     $table->timestamps();
+        // });
     }
 
     /**

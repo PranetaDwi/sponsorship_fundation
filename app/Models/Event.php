@@ -15,7 +15,7 @@ class Event extends Model
 
     public function organizer()
     {
-        return $this->belongsTo(Organization::class);
+        return $this->belongsTo(Organizer::class, 'organizer_id', 'id');
     }
 
     public function eventPhotos()
@@ -36,12 +36,16 @@ class Event extends Model
         return $this->hasOne(EventPlacement::class, 'event_id', 'id');
     }
 
-    public function kotraprestasi(){
-        return $this->hasOne(Kontraprestasi::class, 'event_id', 'id');
+    public function kotraprestasis(){
+        return $this->hasMany(Kontraprestasi::class, 'event_id', 'id');
     }
 
     public function sponsors(){
         return $this->hasMany(Sponsor::class, 'event_id', 'id');
+    }
+
+    public function participantCategories(){
+        return $this->hasMany(ParticipantCategory::class, 'event_id', 'id');
     }
 
 }
