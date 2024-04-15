@@ -23,6 +23,10 @@ class Event extends Model
         return $this->hasMany(EventPhoto::class, 'event_id', 'id');
     }
 
+    public function eventCategories(){
+        return $this->hasMany(EventCategory::class, 'event_id', 'id');
+    }
+
     public function categories()
     {
         return $this->belongsToMany(EventCategoryName::class, 'event_categories');

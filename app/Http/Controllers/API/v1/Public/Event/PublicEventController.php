@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Public\Event\EventInformationResource;
 use App\Http\Resources\Public\Event\EventKontraprestasiResource;
 use App\Http\Resources\Public\Event\EventMitraResource;
+use App\Http\Resources\Public\Event\EventOverviewByCategoryResource;
 use App\Http\Resources\Public\Event\EventOverviewResource;
 use App\Http\Responses\ApiResponse;
 use App\Service\Public\Event\PublicEventService;
@@ -37,10 +38,10 @@ class PublicEventController extends Controller
         }
     }
 
-    public function getOverviewEventByCategory($category){
+    public function getOverviewEventByCategory($category_name_id){
         try {
-            $eventByCategory = $this->publicEventService->getOverviewEventByCategory($category);
-            return new ApiResponse('success',  __('validation.message.loaded'), EventOverviewResource::collection($eventByCategory), 200);
+            $eventByCategory = $this->publicEventService->getOverviewEventByCategory($category_name_id);
+            return new ApiResponse('success',  __('validation.message.loaded'), EventOverviewByCategoryResource::collection($eventByCategory), 200);
         } catch (\Exception $exception) {
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }

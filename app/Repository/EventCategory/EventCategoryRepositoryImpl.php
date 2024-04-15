@@ -20,4 +20,10 @@ class EventCategoryRepositoryImpl implements EventCategoryRepository
     {
         return EventCategory::findOrFail($id);
     }
+
+    public function findByCategoryNameId($category_name_id)
+    {
+        return EventCategory::where('event_category_name_id', $category_name_id)->get();
+        
+    }
 }

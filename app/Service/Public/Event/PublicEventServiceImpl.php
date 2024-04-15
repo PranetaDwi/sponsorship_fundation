@@ -3,6 +3,7 @@
 namespace App\Service\Public\Event;
 
 use App\Repository\Event\EventRepository;
+use App\Repository\EventCategory\EventCategoryRepository;
 use App\Repository\Kontraprestasi\KontraprestasiRepository;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -11,14 +12,17 @@ class PublicEventServiceImpl implements PublicEventService
 {
     protected $eventRepository;
     protected $kontraprestasiRepository;
+    protected $eventCategoryRepository;
 
     public function __construct(
         EventRepository $eventRepository,
-        KontraprestasiRepository $kontraprestasiRepository)
+        KontraprestasiRepository $kontraprestasiRepository,
+        EventCategoryRepository $eventCategoryRepository)
 
     {
         $this->eventRepository = $eventRepository;
         $this->kontraprestasiRepository = $kontraprestasiRepository;
+        $this->eventCategoryRepository = $eventCategoryRepository;
     }
 
     public function getOverviewEventPopuler(){
@@ -42,8 +46,14 @@ class PublicEventServiceImpl implements PublicEventService
         }
     }
 
-    public function getOverviewEventByCategory($category){
-        
+    public function getOverviewEventByCategory($category_name_id){
+        try{
+            return $this->eventCategoryRepository->findByCategoryNameId($category_name_id);
+        } catch (\Exception $exception){
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }catch (ModelNotFoundException $exception) {
+            throw new Exception('Model not found', 404);
+        }
     }
 
     public function getDetailEventInformation($event_id){

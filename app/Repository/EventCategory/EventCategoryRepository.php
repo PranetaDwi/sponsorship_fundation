@@ -9,4 +9,6 @@ interface EventCategoryRepository
     public function findAll();
 
     public function findById($id);
+
+    public function findByCategoryNameId($category_name_id);
 }

@@ -8,7 +8,7 @@ interface PublicEventService
 
     public function getOverviewEventAll();
 
-    public function getOverviewEventByCategory($category);
+    public function getOverviewEventByCategory($category_id);
 
     public function getDetailEventInformation($event_id);
 

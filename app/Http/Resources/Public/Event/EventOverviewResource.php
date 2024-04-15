@@ -47,6 +47,5 @@ class EventOverviewResource extends JsonResource
                 }),
             ];
         }
-
     }
 }
