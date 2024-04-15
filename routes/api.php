@@ -37,7 +37,6 @@ Route::prefix('v1')->group(function () {
 
     // Endpoint tanpa autentikasi
     Route::prefix('events')->group(function () {
-        // endpoint buat event populer aja yang di home
         Route::get('/event-populer-overview', [PublicEventController::class, 'getOverviewEventPopuler'])->name('api.overview-event-populer');
         Route::get('/event-all-overview', [PublicEventController::class, 'getOverviewEventAll'])->name('api.overview-event-all');
         Route::get('/event-detail/{event_id}', [PublicEventController::class, 'getEventDetail'])->name('api.event-detail');

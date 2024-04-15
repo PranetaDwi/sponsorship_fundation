@@ -12,4 +12,9 @@ class EventPlacement extends Model
     protected $fillable = [
         'event_id', 'event_start_date', 'event_end_date', 'event_venue', 'address', 'city', 'province'
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'event_id', 'id');
+    }
 }

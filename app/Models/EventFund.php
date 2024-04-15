@@ -12,4 +12,9 @@ class EventFund extends Model
     protected $fillable = [
         'event_id', 'target_fund', 'sponsor_deadline'
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'event_id', 'id');
+    }
 }

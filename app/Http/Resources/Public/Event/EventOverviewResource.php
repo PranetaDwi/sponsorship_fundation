@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Public\Event;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,9 +19,9 @@ class EventOverviewResource extends JsonResource
             return [
                 'id' => $this->id,
                 'title' => $this->title,
-                'sponsor_countdown' => $this->donation_deadline,
-                'collected_donor' => $this->target_fund,
-                'total_mitra' => $this->target_participants,
+                'sponsor_countdown' => 'Sisa '.Carbon::now()->diffInDays(Carbon::parse($this->eventFund->sponsor_deadline)).' hari lagi',
+                'collected_donor' => 'Rp' . number_format($this->sponsors->sum('amount'), 0, ',', '.'),
+                'total_mitra' => $this->sponsors->unique('entrepreneur_id')->count(),
                 'cover' => $this->eventPhotos()->first()->photo_file,
                 'categories' => $this->categories()->get()->map(function ($category) {
                     return (object) [
@@ -33,13 +34,13 @@ class EventOverviewResource extends JsonResource
             return [
                 'id' => $this->id,
                 'title' => $this->title,
-                'sponsor_countdown' => $this->donation_deadline,
-                'collected_donor' => $this->target_fund,
-                'total_mitra' => $this->total_mitra,
-                'cover' => $this->eventPhotos()->first(),
-                'event_type' => $this->event_type,
+                'sponsor_countdown' => 'Sisa '.Carbon::now()->diffInDays(Carbon::parse($this->eventFund->sponsor_deadline)).' hari lagi',
+                'collected_donor' => 'Rp' . number_format($this->sponsors->sum('amount'), 0, ',', '.'),
+                'total_mitra' => $this->sponsors->unique('entrepreneur_id')->count(),
+                'cover' => $this->eventPhotos()->first()->photo_file,
+                'type_event' => $this->type_event,
                 'categories' => $this->categories()->get()->map(function ($category) {
-                    return (object)[
+                    return (object) [
                         'id' => $category->id,
                         'title' => $category->name,
                     ];

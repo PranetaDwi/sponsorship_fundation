@@ -28,4 +28,20 @@ class Event extends Model
         return $this->belongsToMany(EventCategoryName::class, 'event_categories');
     }
 
+    public function eventFund(){
+        return $this->hasOne(EventFund::class, 'event_id', 'id');
+    }
+
+    public function eventPlacement(){
+        return $this->hasOne(EventPlacement::class, 'event_id', 'id');
+    }
+
+    public function kotraprestasi(){
+        return $this->hasOne(Kontraprestasi::class, 'event_id', 'id');
+    }
+
+    public function sponsors(){
+        return $this->hasMany(Sponsor::class, 'event_id', 'id');
+    }
+
 }

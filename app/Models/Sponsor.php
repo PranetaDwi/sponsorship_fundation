@@ -12,4 +12,9 @@ class Sponsor extends Model
     protected $fillable = [
         'event_id', 'amount', 'entrepreneur_id'
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'event_id', 'id');
+    }
 }
