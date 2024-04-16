@@ -18,4 +18,13 @@ class Entrepreneur extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function sponsors(){
+        return $this->hasMany(Sponsor::class, 'entrepreneur_id', 'id');
+    }
+
+    public function mitra()
+    {
+        return $this->belongsTo(Mitra::class, 'mitra_id', 'id');
+    }
 }

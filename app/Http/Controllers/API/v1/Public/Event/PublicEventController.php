@@ -80,8 +80,8 @@ class PublicEventController extends Controller
     public function getListEventMitra($event_id)
     {
         try {
-            $eventDetail = $this->publicEventService->getListEventMitra($event_id);
-            return new ApiResponse('success',  __('validation.message.loaded'), new EventMitraResource($eventDetail), 200);
+            $eventMitraList = $this->publicEventService->getListEventMitra($event_id);
+            return new ApiResponse('success',  __('validation.message.loaded'), EventMitraResource::collection($eventMitraList), 200);
         } catch (\Exception $exception) {
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }

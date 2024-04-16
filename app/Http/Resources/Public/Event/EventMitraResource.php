@@ -13,7 +13,11 @@ class EventMitraResource extends JsonResource
      * @return array<string, mixed>
      */
     public function toArray(Request $request): array
-    {
-        return parent::toArray($request);
+    { 
+        return [
+            'mitra_name' => $this->entrepreneur->mitra->name,
+            'mitra_logo' => $this->entrepreneur->mitra->photo_file,
+            'total_fund' => $this->total_amount,
+        ];
     }
 }

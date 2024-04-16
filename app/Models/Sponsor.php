@@ -17,4 +17,9 @@ class Sponsor extends Model
     {
         return $this->belongsTo(Event::class, 'event_id', 'id');
     }
+
+    public function entrepreneur()
+    {
+        return $this->belongsTo(Entrepreneur::class, 'entrepreneur_id', 'id');
+    }
 }

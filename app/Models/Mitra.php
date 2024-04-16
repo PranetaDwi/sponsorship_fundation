@@ -12,4 +12,9 @@ class Mitra extends Model
     protected $fillable = [
         'name', 'description', 'address', 'city', 'province', 'photo_file'
     ];
+
+    public function entrepreneurs()
+    {
+        return $this->hasMany(Entrepreneur::class, 'mitra_id', 'id');
+    }
 }

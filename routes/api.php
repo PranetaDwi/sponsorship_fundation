@@ -40,7 +40,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/event-populer-overview', [PublicEventController::class, 'getOverviewEventPopuler'])->name('api.overview-event-populer');
         Route::get('/event-all-overview', [PublicEventController::class, 'getOverviewEventAll'])->name('api.overview-event-all');
         Route::get('/event-category/{category_id}', [PublicEventController::class, 'getOverviewEventByCategory'])->name('api.overview-event-by-category');
-        // Buat detail event bakal dibagi jadi 3 endpoint utama
+        // Buat detail event bakal dibagi jadi 4 endpoint utama
         Route::get('/event-detail/{event_id}/detail-information', [PublicEventController::class, 'getDetailEventInformation'])->name('api.detail-event-information');
         Route::get('/event-detail/{event_id}/list-kontraprestasi', [PublicEventController::class, 'getListEventKontraprestasi'])->name('api.list-event-kontraprestasi');
         Route::get('/event-detail/{event_id}/list-kontraprestasi/{id}', [PublicEventController::class, 'getDetailEventKontraprestasi'])->name('api.detail-event-kontraprestasi');
