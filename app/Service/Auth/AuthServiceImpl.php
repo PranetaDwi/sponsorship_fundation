@@ -4,15 +4,18 @@ namespace App\Service\Auth;
 
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
-use App\Http\Requests\Auth\UserRegisterRequest;
 use App\Http\Resources\Auth\LoginResource;
-use App\Http\Responses\ApiResponse;
 use App\Repository\User\UserRepository;
 use App\Repository\UserData\UserDataRepository;
 use Exception;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Laravel\Passport\RefreshToken;
+use Laravel\Passport\Token;
 
 class AuthServiceImpl implements AuthService
 {
@@ -113,6 +116,16 @@ class AuthServiceImpl implements AuthService
             'user_data' => $userData,
         ];
         return $data;
+    }
+
+    public function logout(Request $request)
+    {
+        try {
+            $user = Auth::user()->token();
+            $user->revoke();
+        } catch (\Exception $exception) {
+            throw new Exception($exception->getMessage(), $exception->getCode());
+        }
     }
 
 }

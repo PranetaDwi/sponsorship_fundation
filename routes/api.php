@@ -50,6 +50,9 @@ Route::prefix('v1')->group(function () {
     // Mulai menggunakan middleware
     Route::middleware('auth:api')->group(function () {
 
+        //logout
+        Route::post('/logout', [LoginController::class, 'logout'])->name('api.logout');
+
         // Untuk user organizer dan entrepreneur
         Route::middleware(['scope:organizer,entrepreneur'])->group(function () {
             Route::get('/home', function () {
