@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\v1\Admin\IconManagement\IconManagementController;
 use App\Http\Controllers\API\v1\Auth\LoginController;
 use App\Http\Controllers\API\v1\Auth\RegisterController;
+use App\Http\Controllers\API\V1\Common\ProfileManagement\ProfileManagementController;
 use App\Http\Controllers\API\v1\Entrepreneur\Mitra\MitraController;
 use App\Http\Controllers\API\v1\Organizer\Organization\OrganizationController;
 use App\Http\Controllers\API\v1\Organizer\Event\EventController;
@@ -55,9 +56,7 @@ Route::prefix('v1')->group(function () {
 
         // Untuk user organizer dan entrepreneur
         Route::middleware(['scope:organizer,entrepreneur'])->group(function () {
-            Route::get('/home', function () {
-                return 'Welcome to Organizer & Entrepreneur in Dashboard';
-            });
+            Route::get('/profile', [ProfileManagementController::class, 'getMyProfile'])->name('api.profile');
         });
 
         // Untuk user organizer

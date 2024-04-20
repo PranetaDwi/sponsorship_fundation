@@ -28,7 +28,6 @@ use App\Repository\EventPlacement\EventPlacementRepositoryImpl;
 use App\Repository\IconPhotoKontraprestasi\IconPhotoKontraprestasiRepository;
 use App\Repository\IconPhotoKontraprestasi\IconPhotoKontraprestasiRepositoryImpl;
 use App\Repository\Kontraprestasi\KontraprestasiRepository;
-use App\Repository\Kontraprestasi\KontraptrestasiRepository;
 use App\Repository\Kontraprestasi\KontraprestasiRepositoryImpl;
 use App\Repository\Sponsor\SponsorRepository;
 use App\Repository\Sponsor\SponsorRepositoryImpl;
@@ -36,6 +35,8 @@ use App\Service\Admin\IconManagement\IconManagementService;
 use App\Service\Admin\IconManagement\IconManagementServiceImpl;
 use App\Service\Auth\AuthService;
 use App\Service\Auth\AuthServiceImpl;
+use App\Service\Common\ProfileManagement\ProfileManagementService;
+use App\Service\Common\ProfileManagement\ProfileManagementServiceImpl;
 use App\Service\Entrepreneur\Mitra\MitraService;
 use App\Service\Entrepreneur\Mitra\MitraServiceImpl;
 use App\Service\Organizer\Organization\OrganizationService;
@@ -72,6 +73,7 @@ class RepoServiceProvider extends ServiceProvider
         $this->app->bind(EventService::class, EventServiceImpl::class);
         $this->app->bind(PublicEventService::class, PublicEventServiceImpl::class);
         $this->app->bind(IconManagementService::class, IconManagementServiceImpl::class);
+        $this->app->bind(ProfileManagementService::class, ProfileManagementServiceImpl::class);
     }
 
     /**
