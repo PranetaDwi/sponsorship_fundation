@@ -31,6 +31,8 @@ use App\Repository\Kontraprestasi\KontraprestasiRepository;
 use App\Repository\Kontraprestasi\KontraprestasiRepositoryImpl;
 use App\Repository\Sponsor\SponsorRepository;
 use App\Repository\Sponsor\SponsorRepositoryImpl;
+use App\Service\Admin\EventCategoryManagement\EventCategoryManagementService;
+use App\Service\Admin\EventCategoryManagement\EventCategoryManagementServiceImpl;
 use App\Service\Admin\IconManagement\IconManagementService;
 use App\Service\Admin\IconManagement\IconManagementServiceImpl;
 use App\Service\Auth\AuthService;
@@ -74,6 +76,7 @@ class RepoServiceProvider extends ServiceProvider
         $this->app->bind(PublicEventService::class, PublicEventServiceImpl::class);
         $this->app->bind(IconManagementService::class, IconManagementServiceImpl::class);
         $this->app->bind(ProfileManagementService::class, ProfileManagementServiceImpl::class);
+        $this->app->bind(EventCategoryManagementService::class, EventCategoryManagementServiceImpl::class);
     }
 
     /**

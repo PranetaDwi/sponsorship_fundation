@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('event_category_names', function (Blueprint $table) {
             $table->integerIncrements('id');
-            $table->string('name', 50);
+            $table->string('name', 50)->unique();
+            $table->string('icon', 200);
             $table->timestamps();
         });
     }

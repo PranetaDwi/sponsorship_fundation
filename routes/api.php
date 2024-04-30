@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\v1\Admin\EventCategoryManagement\EventCategoryManagementController;
 use App\Http\Controllers\API\v1\Admin\IconManagement\IconManagementController;
 use App\Http\Controllers\API\v1\Auth\LoginController;
 use App\Http\Controllers\API\v1\Auth\RegisterController;
@@ -86,6 +87,10 @@ Route::prefix('v1')->group(function () {
         Route::middleware(['scopes:admin'])->group(function () {
             Route::prefix('managemen-icon-kontraprestasi')->group(function () {
                 Route::post('post-icon-kontraprestasi', [IconManagementController::class, 'postIconKontraprestasi'])->name('api.list-icon-kontraprestasi');
+            });
+            Route::prefix('managemen-categori-event')->group(function () {
+                Route::get('list-categori-event', [EventCategoryManagementController::class, 'getEventCategories'])->name('api.list-categori-event');
+                Route::post('post-category-event', [EventCategoryManagementController::class, 'postEventCategory'])->name('api.post-category-event');
             });
         });
 

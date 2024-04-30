@@ -1,21 +1,33 @@
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
+    Options -MultiViews -Indexes
+</IfModule>
 
-    RewriteEngine On
+RewriteEngine On
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# Handle Authorization Header
+RewriteCond %{HTTP:Authorization} .
+RewriteRule . — [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+# Redirect non-www to www
+RewriteCond %{HTTP_HOST} !^www.
+RewriteRule . https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # Send Requests To Front Controller...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+# Redirect non-http to https
+RewriteCond %{HTTPS} off
+RewriteRule . https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Redirect Trailing Slashes If Not A Folder…
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [L,R=301]
+
+# Handle Front Controller…
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
+
+# Remove index.php
+RewriteCond %{THE_REQUEST} ^index.php [NC]
+RewriteRule (.?)index.php/(.*) /$1$2 [R=301,NE,L]
 </IfModule>
