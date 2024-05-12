@@ -19,7 +19,7 @@ class ProfileManagementResource extends JsonResource
             return [
                 'photo_file' => $this->organizer->organization->photo_file,
                 'full_name' => $this->userData->full_name,
-                'email' => $this->userData->email,
+                'email' => $this->userData->user->email,
                 'phone' => $this->userData->phone,
                 'name' => $this->organizer->organization->name,
                 'address' => $this->organizer->organization->address,
@@ -32,7 +32,7 @@ class ProfileManagementResource extends JsonResource
             return [
                 'photo_file' => $this->entrepreneur->mitra->photo_file,
                 'full_name' => $this->userData->full_name,
-                'email' => $this->userData->email,
+                'email' => $this->userData->user->email,
                 'phone' => $this->userData->phone,
                 'name' => $this->entrepreneur->mitra->name,
                 'address' => $this->entrepreneur->mitra->address,

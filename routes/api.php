@@ -4,7 +4,7 @@ use App\Http\Controllers\API\v1\Admin\EventCategoryManagement\EventCategoryManag
 use App\Http\Controllers\API\v1\Admin\IconManagement\IconManagementController;
 use App\Http\Controllers\API\v1\Auth\LoginController;
 use App\Http\Controllers\API\v1\Auth\RegisterController;
-use App\Http\Controllers\API\V1\Common\ProfileManagement\ProfileManagementController;
+use App\Http\Controllers\API\v1\Common\ProfileManagement\ProfileManagementController;
 use App\Http\Controllers\API\v1\Entrepreneur\Mitra\MitraController;
 use App\Http\Controllers\API\v1\Organizer\Organization\OrganizationController;
 use App\Http\Controllers\API\v1\Organizer\Event\EventController;
