@@ -18,5 +18,5 @@ interface UserRepository
 
     public function resetPassword($id, $password);
 
-    public function fillUpdateById($id, $data);
+    public function fillUpdateById($data);
 }

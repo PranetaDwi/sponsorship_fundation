@@ -3,6 +3,7 @@
 namespace App\Repository\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepositoryImpl implements UserRepository
 {
@@ -42,12 +43,12 @@ class UserRepositoryImpl implements UserRepository
         return User::where('id', $id)->update(['password' => bcrypt($password)]);
     }
 
-    public function fillUpdateById($id, $data)
+    public function fillUpdateById($data)
     {
+        $id = Auth::user()->id;
         $user = User::find($id);
-        $user->fill($data);
+        $user->update($data);
         $user->save();
-
         return User::find($id);
     }
 }

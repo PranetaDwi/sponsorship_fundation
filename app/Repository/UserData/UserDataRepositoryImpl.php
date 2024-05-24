@@ -3,6 +3,7 @@
 namespace App\Repository\UserData;
 
 use App\Models\UserData;
+use Illuminate\Support\Facades\Auth;
 
 class UserDataRepositoryImpl implements UserDataRepository
 {
@@ -11,12 +12,12 @@ class UserDataRepositoryImpl implements UserDataRepository
         return UserData::create($data);
     }
 
-    public function fillUpdateById($id, $data)
+    public function fillUpdateById($data)
     {
-        $user = UserData::find($id);
+        $id = Auth::user()->id;
+        $user = UserData::findOrFail($id);
         $user->fill($data);
         $user->save();
-
         return UserData::find($id);
     }
 }

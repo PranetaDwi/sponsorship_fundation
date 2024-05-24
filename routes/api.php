@@ -58,6 +58,14 @@ Route::prefix('v1')->group(function () {
         // Untuk user organizer dan entrepreneur
         Route::middleware(['scope:organizer,entrepreneur'])->group(function () {
             Route::get('/profile', [ProfileManagementController::class, 'getMyProfile'])->name('api.profile');
+            // coba ngambil dari yang ada dulu :) buat sebelum update
+            Route::post('/profile/update', [ProfileManagementController::class, 'getUpdateProfile'])->name('api.update-profile');
+            // endpoint untuk masing-masing akun
+            Route::post('/profile/update-full-name', [ProfileManagementController::class, 'updateFullName'])->name('api.update-full-name');
+            Route::post('/profile/update-email', [ProfileManagementController::class, 'updateEmail'])->name('api.update-email');
+            Route::post('/profile/update-phone', [ProfileManagementController::class, 'updatePhone'])->name('api.update-phone');
+            Route::post('profile/check-last-password', [ProfileManagementController::class, 'checkLastPassword'])->name('api.check-last-password');
+            Route::post('/profile/update-password', [ProfileManagementController::class, 'updatePassword'])->name('api.update-password');
         });
 
         // Untuk user organizer
