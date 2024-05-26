@@ -9,4 +9,6 @@ interface OrganizationRepository
     public function findAll();
 
     public function findById($id);
+
+    public function update($data, $id);
 }

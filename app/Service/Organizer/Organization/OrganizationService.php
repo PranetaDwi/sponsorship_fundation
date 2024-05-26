@@ -10,4 +10,6 @@ interface OrganizationService
 
     public function postOrganizationEnrollment(OrganizationEnrollmentRequest $request, $user_id);
 
+    public function updateOrganizationData(OrganizationEnrollmentRequest $request);
+
 }

@@ -20,4 +20,10 @@ class OrganizationRepositoryImpl implements OrganizationRepository
     {
         return Organization::findOrFail($id);
     }
+
+    public function update($data, $id)
+    {
+        Organization::where('id', $id)->update($data);
+        return $this->findById($id);
+    }
 }

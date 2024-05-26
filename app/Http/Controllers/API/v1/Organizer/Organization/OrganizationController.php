@@ -28,11 +28,6 @@ class OrganizationController extends Controller
         }
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(OrganizationEnrollmentRequest $request, $user_id)
     {
         try {
@@ -42,23 +37,13 @@ class OrganizationController extends Controller
         }
     }
 
-    public function show(string $id)
+    public function update(OrganizationEnrollmentRequest $request)
     {
-        //
+        try {
+            return new ApiResponse('success',  __('validation.message.updated'), $this->organizationService->updateOrganizationData($request), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
     }
 
-    public function edit(string $id)
-    {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
-    }
 }
