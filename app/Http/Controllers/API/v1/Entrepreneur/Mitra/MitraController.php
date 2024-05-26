@@ -37,4 +37,13 @@ class MitraController extends Controller
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }
     }
+
+    public function update(MitraEnrollmentRequest $request)
+    {
+        try {
+            return new ApiResponse('success',  __('validation.message.updated'), $this->mitraService->updateMitra($request), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
 }

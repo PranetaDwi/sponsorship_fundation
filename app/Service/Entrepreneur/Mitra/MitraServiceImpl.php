@@ -74,4 +74,28 @@ class MitraServiceImpl implements MitraService
         return $data;
         
     }
+
+    public function updatemitra(MitraEnrollmentRequest $request)
+    {
+        try {
+            $mitraId = auth()->user()->entrepreneur->mitra_id;
+            $validatedData = $request->validated();
+            $file = $request->photo_file;
+            if(!$file == null){
+                $filenameWithExt = $file->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $file->getClientOriginalExtension();
+                $filenameOriginal = 'entrepreneur/mitra/' . $filename . '_' . time() . '.' . $extension;
+                $path = $file->storeAs('public/' . $filenameOriginal);
+                $validatedData['photo_file'] = 'storage/'.$filenameOriginal;
+            }
+            $mitra = $this->mitraRepository->update($validatedData, $mitraId);
+        }catch (\Exception $exception){
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }catch (AuthorizationException $exception) {
+            throw new Exception('You are not authorized to access', 403);
+        }
+
+        return $mitra;
+    }
 }

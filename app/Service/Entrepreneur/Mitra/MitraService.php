@@ -10,4 +10,6 @@ interface MitraService
 
     public function postMitraEnrollment(MitraEnrollmentRequest $request, $user_id);
 
+    public function updateMitra(MitraEnrollmentRequest $request);
+
 }

@@ -103,9 +103,7 @@ Route::prefix('v1')->group(function () {
         Route::middleware(['scopes:entrepreneur'])->group(function () {
             Route::get('/mitra-lists', [MitraController::class, 'index'])->name('api.mitra-lists');
 
-            Route::prefix('mitra-data')->group(function () {
-                Route::get('/update-mitra-data', [MitraController::class, 'update'])->name('api.update-mitra-data');
-            });
+            Route::post('/update-mitra-data', [MitraController::class, 'update'])->name('api.update-mitra-data');
         });
 
         // Untuk user admin

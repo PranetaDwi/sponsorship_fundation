@@ -20,4 +20,10 @@ class MitraRepositoryImpl implements MitraRepository
     {
         return Mitra::findOrFail($id);
     }
+
+    public function update($data, $id)
+    {
+        Mitra::where('id', $id)->update($data);
+        return $this->findById($id);
+    }
 }
