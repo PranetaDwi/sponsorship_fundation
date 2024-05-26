@@ -55,14 +55,6 @@ class ProfileManagementController extends Controller
         }
     }
 
-    public function checkLastPassword(Request $request){
-        try {
-            return new ApiResponse('success', __('validation.message.confirmed'), $this->profileManagementService->checkLastPassword($request), 200);
-        } catch (\Exception $exception) {
-            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
-        }
-    }
-
     public function updatePassword(PasswordRequest $request){
         try {
             return new ApiResponse('success', __('validation.message.updated'), $this->profileManagementService->updatePassword($request), 200);

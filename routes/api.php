@@ -64,8 +64,8 @@ Route::prefix('v1')->group(function () {
             Route::post('/profile/update-full-name', [ProfileManagementController::class, 'updateFullName'])->name('api.update-full-name');
             Route::post('/profile/update-email', [ProfileManagementController::class, 'updateEmail'])->name('api.update-email');
             Route::post('/profile/update-phone', [ProfileManagementController::class, 'updatePhone'])->name('api.update-phone');
-            Route::post('profile/check-last-password', [ProfileManagementController::class, 'checkLastPassword'])->name('api.check-last-password');
             Route::post('/profile/update-password', [ProfileManagementController::class, 'updatePassword'])->name('api.update-password');
+
         });
 
         // Untuk user organizer
@@ -83,6 +83,13 @@ Route::prefix('v1')->group(function () {
                     Route::post('/post-event-placement/{event_id}', [EventController::class, 'postEventPlacement'])->name('api.post-event-placement');
                     Route::post('/post-kontraprestasi/{event_id}', [EventController::class, 'postKontraprestasi'])->name('api.post-kontraprestasi');
                 });
+            });
+
+            Route::prefix('organization-data')->group(function () {
+                Route::get('', [EventController::class, 'index'])->name('api.event-lists');
+                Route::get('/update-organization-data', [EventController::class, 'show'])->name('api.event-detail');
+                Route::post('/event-update/{event_id}', [EventController::class, 'update'])->name('api.event-update');
+                Route::delete('/event-delete/{event_id}', [EventController::class, 'destroy'])->name('api.event-delete');
             });
         });
     

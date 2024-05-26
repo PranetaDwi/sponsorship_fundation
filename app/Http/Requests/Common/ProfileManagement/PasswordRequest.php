@@ -24,8 +24,9 @@ class PasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password' => 'required|min:5',
-            'password_confirmation' => 'required|same:password',
+            'old_password' => 'required',
+            'new_password' => 'required|min:5',
+            'new_password_confirmation' => 'required|same:new_password',
         ];
     }
 }

@@ -10,8 +10,10 @@ use App\Http\Requests\Common\ProfileManagement\EmailRequest;
 use App\Http\Requests\Common\ProfileManagement\FullNameRequest;
 use App\Http\Requests\Common\ProfileManagement\PasswordRequest;
 use App\Http\Requests\Common\ProfileManagement\PhoneRequest;
+use App\Models\User;
 use App\Repository\UserData\UserDataRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileManagementServiceImpl implements ProfileManagementService
 {
@@ -83,8 +85,18 @@ class ProfileManagementServiceImpl implements ProfileManagementService
     }
 
     public function updatePassword(PasswordRequest $request){
+        
         try{
             $data = $request->validated();
+            
+            if(!Hash::check($data['old_password'], auth()->user()->password)){
+                throw new Exception(__('validation.message.old_password_not_match'), 400);
+            }
+
+            User::whereId(auth()->user()->id)->update([
+                'password' => Hash::make($data['new_password'])
+            ]);
+
             return $this->userDataRepository->fillUpdateById($data);
         } catch (\Exception $exception){
             throw new Exception(__('validation.message.something_went_wrong'), 500);

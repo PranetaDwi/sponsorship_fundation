@@ -18,8 +18,6 @@ interface ProfileManagementService
 
     public function updatePhone(PhoneRequest $request);
 
-    public function checkLastPassword(Request $request);
-
     public function updatePassword(PasswordRequest $request);
 
 }
