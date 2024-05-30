@@ -7,10 +7,15 @@ use App\Http\Requests\Organizer\Event\CreateEventFundRequest;
 use App\Http\Requests\Organizer\Event\CreateEventInformationRequest;
 use App\Http\Requests\Organizer\Event\CreateEventKontraprestasiRequest;
 use App\Http\Requests\Organizer\Event\CreateEventPlacementRequest;
+use App\Http\Requests\Organizer\Event\UpdateEventRequest;
 use App\Http\Resources\Organizer\Event\EventCategoriesResource;
+use App\Http\Resources\Organizer\Event\EventFundResource;
+use App\Http\Resources\Organizer\Event\EventInformationResource;
+use App\Http\Resources\Organizer\Event\EventKontraprestasiResource;
 use App\Http\Resources\Organizer\Event\EventPreviewResource;
 use App\Service\Organizer\Event\EventService;
 use App\Http\Responses\ApiResponse;
+use App\Models\EventPlacement;
 
 class EventController extends Controller
 {
@@ -76,6 +81,24 @@ class EventController extends Controller
         } catch (\Exception $exception) {
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }
-    }   
+    }
+    
+    public function updateEvent(UpdateEventRequest $request, $event_id)
+    {
+        try {
+            return new ApiResponse('success',  __('validation.message.created'), $this->eventService->updateEvent($request, $event_id), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
+    public function updateEventKontraprestasi(CreateEventKontraprestasiRequest $request, $event_id)
+    {
+        try {
+            return new ApiResponse('success',  __('validation.message.created'), $this->eventService->updateEventKontraprestasi($request, $event_id), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
 
 }

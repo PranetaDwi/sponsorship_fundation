@@ -18,4 +18,11 @@ class Kontraprestasi extends Model
         return $this->belongsTo(Event::class, 'event_id', 'id');
     }
 
+    public function iconPhotoKontraprestasi()
+    {
+        return $this->belongsTo(IconPhotoKontraprestasi::class, 'icon_photo_kontraprestasi_id', 'id');
+    }
+
+
+
 }

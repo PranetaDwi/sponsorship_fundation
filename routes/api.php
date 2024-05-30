@@ -85,14 +85,8 @@ Route::prefix('v1')->group(function () {
                 });
 
                 Route::prefix('update-event')->group(function () {
-                    Route::get('/get-event-information/{event_id}', [EventController::class, 'getEventInformation'])->name('api.get-event-information');
-                    Route::post('/update-event-information/{event_id}', [EventController::class, 'updateEventInformation'])->name('api.update-event-information');
-                    Route::get('/get-event-fund/{event_id}', [EventController::class, 'geteventFund'])->name('api.get-event-fund');
-                    Route::post('/update-event-fund/{event_id}', [EventController::class, 'updateEventFund'])->name('api.update-event-fund');
-                    Route::get('/get-event-placement/{event_id}', [EventController::class, 'geteventPlacement'])->name('api.get-event-placement');
-                    Route::post('/update-event-placement/{event_id}', [EventController::class, 'updateEventPlacement'])->name('api.update-event-placement');
-                    Route::get('/get-kontraprestasi/{event_id}', [EventController::class, 'getKontraprestasi'])->name('api.get-kontraprestasi');
-                    Route::post('/update-kontraprestasi/{event_id}', [EventController::class, 'updateKontraprestasi'])->name('api.update-kontraprestasi');
+                    Route::post('/update-event/{event_id}', [EventController::class, 'updateEvent'])->name('api.update-event');
+                    Route::post('/update-event-kontraprestasi/{id}', [EventController::class, 'updateEventKontraprestasi'])->name('api.update-event-kontraprestasi');
                 });
             });
 

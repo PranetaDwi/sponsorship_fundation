@@ -12,4 +12,9 @@ class IconPhotoKontraprestasi extends Model
     protected $fillable = [
          'photo_file'
     ];
+
+    public function kontraprestasies()
+    {
+        return $this->hasMany(Kontraprestasi::class, 'icon_photo_kontraprestasi_id', 'id');
+    }
 }

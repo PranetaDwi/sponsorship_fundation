@@ -22,4 +22,14 @@ class KontraprestasiRepositoryImpl implements KontraprestasiRepository
         return Kontraprestasi::where('event_id', $event_id)->where('id', $id)->first();
     }
 
+    public function findById($id)
+    {
+        return Kontraprestasi::where('id', $id)->first();
+    }
+
+    public function update($data, $id)
+    {
+        return Kontraprestasi::where('id', $id)->update($data);
+    }
+
 }

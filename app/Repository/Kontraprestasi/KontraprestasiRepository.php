@@ -10,4 +10,8 @@ interface KontraprestasiRepository
 
     public function findByIdAndEventId($event_id, $id);
 
+    public function findById($id);
+
+    public function update($data, $id);
+
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\Organizer\Event\CreateEventFundRequest;
 use App\Http\Requests\Organizer\Event\CreateEventInformationRequest;
 use App\Http\Requests\Organizer\Event\CreateEventKontraprestasiRequest;
 use App\Http\Requests\Organizer\Event\CreateEventPlacementRequest;
+use App\Http\Requests\Organizer\Event\UpdateEventRequest;
 use App\Repository\EventPhoto\EventPhotoRepository;
 use App\Repository\Event\EventRepository;
 use App\Repository\EventCategoryName\EventCategoryNameRepository;
@@ -212,4 +213,77 @@ class EventServiceImpl implements EventService
         return $response;
     }
 
+    public function updateEvent(UpdateEventRequest $request, $event_id){
+        $response = [];
+        try {
+
+            // information
+            $eventInformation = [
+                'organizer_id' => auth()->user()->organizer->id,
+                'title' => $request->title_event,
+                'description' => $request->description,
+                'target_participants' => $request->target_participants,
+                'participant_description' => $request->participant_description,
+                'status_event' => $request->status_event,
+                'type_event' => $request->type_event,
+            ];
+
+            $response['event'] = $this->eventRepository->save($eventInformation);
+
+            // fund
+            $eventFund = [
+                'event_id' => $event_id,
+                'target_fund' => $request->target_fund,
+                'sponsor_deadline' => $request->sponsor_deadline,
+            ];
+
+            $response['event'] = $this->eventFundRepository->save($eventFund);
+
+            // placement
+            $eventPlacement = [
+                'event_id' => $event_id,
+                'event_start_date' => $request->event_start_date,
+                'event_end_date' => $request->event_end_date,
+                'event_venue' => $request->event_venue,
+                'address' => $request->address,
+                'city' => $request->city,
+                'province' => $request->province,
+            ];
+
+            $response['event'] = $this->eventPlacementRepository->save($eventPlacement);
+
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }catch (AuthorizationException $exception) {
+            throw new Exception('You are not authorized to access', 403);
+        }
+
+        return $response;
+
+    }
+
+
+    public function updateEventKontraprestasi(CreateEventKontraprestasiRequest $request, $id){
+        $response = [];
+        try {
+            $eventKontraprestasi = [
+                'event_id' => $id,
+                'title' => $request->title,
+                'min_sponsor' => $request->min_sponsor,
+                'max_sponsor' => $request->max_sponsor,
+                'feedback' => $request->feedback,
+                'icon_photo_kontraprestasi_id' => $request->icon_photo_kontraprestasi_id,
+            ];
+
+            $response['kontraprestasi'] = $this->kontraprestasiRepository->update($eventKontraprestasi, $id);
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }catch (AuthorizationException $exception) {
+            throw new Exception('You are not authorized to access', 403);
+        }
+
+        return $response;
+    }
 }
