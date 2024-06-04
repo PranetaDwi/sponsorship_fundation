@@ -14,6 +14,7 @@ use App\Repository\EventCategory\EventCategoryRepository;
 use App\Repository\EventFund\EventFundRepository;
 use App\Repository\EventPlacement\EventPlacementRepository;
 use App\Repository\Kontraprestasi\KontraprestasiRepository;
+use App\Repository\ParticipantCategory\ParticipantCategoryRepository;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -28,6 +29,7 @@ class EventServiceImpl implements EventService
     protected $eventFundRepository;
     protected $eventPlacementRepository;
     protected $kontraprestasiRepository;
+    protected $participantCategoryRepository;
 
 
     public function __construct(
@@ -37,7 +39,8 @@ class EventServiceImpl implements EventService
         EventPhotoRepository $eventPhotoRepository,
         EventFundRepository $eventFundRepository,
         EventPlacementRepository $eventPlacementRepository,
-        KontraprestasiRepository $kontraprestasiRepository)
+        KontraprestasiRepository $kontraprestasiRepository,
+        ParticipantCategoryRepository $participantCategoryRepository)
     {
         $this->eventRepository = $eventRepository;
         $this->eventCategoryRepository = $eventCategoryRepository;
@@ -46,6 +49,7 @@ class EventServiceImpl implements EventService
         $this->eventFundRepository = $eventFundRepository;
         $this->eventPlacementRepository = $eventPlacementRepository;
         $this->kontraprestasiRepository = $kontraprestasiRepository;
+        $this->participantCategoryRepository = $participantCategoryRepository;
     }
     
     // diatur ulang lagi buset ya
@@ -97,6 +101,23 @@ class EventServiceImpl implements EventService
             throw new Exception('You are not authorized to access', 403);
         }
 
+        try {
+            if ($request->has('participant_category')) {
+                $response['participant_categories'] = []; 
+                foreach ($request->participant_category as $category) {
+                    $data = [
+                        'event_id' => $response['event']['id'],
+                        'name' => $category,
+                    ];
+                    $response['participant_categories'][] = $this->participantCategoryRepository->save($data);
+                }   
+            }
+        } catch (\Exception $exception){
+            dd($exception->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }catch (AuthorizationException $exception) {
+            throw new Exception('You are not authorized to access', 403);
+        }
 
         if ($request->hasFile('photo_file')) {
             $photo_file = [];
@@ -119,7 +140,7 @@ class EventServiceImpl implements EventService
                     throw new Exception('Something went wrong: ' . $exception->getMessage(), 500);
                 }
             }
-            $response['photo_files'] = $photo_file;
+            $response['photo_files'][] = $photo_file;
         }
 
         try {
@@ -133,7 +154,7 @@ class EventServiceImpl implements EventService
                     $eventCategory[] = $this->eventCategoryRepository->save($dataCategory);
                 }   
             }
-            $response['event_category_name_id'] = $eventCategory;
+            $response['event_category_name_id'][] = $eventCategory;
         } catch (\Exception $exception) {
             dd($exception->getMessage());
             DB::rollBack();

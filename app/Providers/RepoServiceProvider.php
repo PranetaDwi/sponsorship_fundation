@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Sponsor;
 use Illuminate\Support\ServiceProvider;
 
 use App\Repository\User\UserRepository;
@@ -29,6 +28,8 @@ use App\Repository\IconPhotoKontraprestasi\IconPhotoKontraprestasiRepository;
 use App\Repository\IconPhotoKontraprestasi\IconPhotoKontraprestasiRepositoryImpl;
 use App\Repository\Kontraprestasi\KontraprestasiRepository;
 use App\Repository\Kontraprestasi\KontraprestasiRepositoryImpl;
+use App\Repository\ParticipantCategory\ParticipantCategoryRepository;
+use App\Repository\ParticipantCategory\ParticipantCategoryRepositoryImpl;
 use App\Repository\Sponsor\SponsorRepository;
 use App\Repository\Sponsor\SponsorRepositoryImpl;
 use App\Service\Admin\EventCategoryManagement\EventCategoryManagementService;
@@ -68,6 +69,7 @@ class RepoServiceProvider extends ServiceProvider
         $this->app->bind(KontraprestasiRepository::class, KontraprestasiRepositoryImpl::class);
         $this->app->bind(IconPhotoKontraprestasiRepository::class, IconPhotoKontraprestasiRepositoryImpl::class);
         $this->app->bind(SponsorRepository::class, SponsorRepositoryImpl::class);
+        $this->app->bind(ParticipantCategoryRepository::class, ParticipantCategoryRepositoryImpl::class);
 
         $this->app->bind(AuthService::class, AuthServiceImpl::class);
         $this->app->bind(MitraService::class, MitraServiceImpl::class);
