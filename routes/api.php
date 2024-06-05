@@ -85,8 +85,10 @@ Route::prefix('v1')->group(function () {
                 });
 
                 Route::prefix('update-event')->group(function () {
-                    Route::post('/update-event/{event_id}', [EventController::class, 'updateEvent'])->name('api.update-event');
-                    Route::post('/update-event-kontraprestasi/{id}', [EventController::class, 'updateEventKontraprestasi'])->name('api.update-event-kontraprestasi');
+                    Route::post('/{event_id}', [EventController::class, 'updateEvent'])->name('api.update-event');
+                    Route::get('/get-kontraprestasi/{event_id}', [EventController::class, 'getEventKontraprestasi'])->name('api.get-event-kontraprestasi');
+                    Route::get('/show-kontraprestasi/{id}', [EventController::class, 'showEventKontraprestasi'])->name('api.show-event-kontraprestasi');
+                    Route::post('/post-update-kontraprestasi/{id}', [EventController::class, 'postUpdateKontraprestasi'])->name('api.post-update-kontraprestasi');
                 });
             });
 
@@ -114,6 +116,7 @@ Route::prefix('v1')->group(function () {
         // Untuk user admin dan organizer
         Route::middleware(['scope:admin,organizer'])->group(function () {
             Route::prefix('icon-kontraprestasi')->group(function () {
+                // ini buat di add kontraprestasi, update kontraprestasi, dan get kontraprestasi
                 Route::get('list-icon-kontraprestasi', [IconManagementController::class, 'getIconKontraprestasi'])->name('api.list-icon-kontraprestasi');
             });
         });

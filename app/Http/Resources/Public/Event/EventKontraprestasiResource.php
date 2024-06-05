@@ -17,12 +17,14 @@ class EventKontraprestasiResource extends JsonResource
         if($request->route()->getName() === 'api.list-event-kontraprestasi'){
             return [
                 'id' => $this->id,
+                'photo_file' => $this->iconPhotoKontraprestasi->photo_file,
                 'name' => $this->title,
                 'range' => $this->min_sponsor.' - '.$this->max_sponsor,
             ];
         } elseif ($request->route()->getName() === 'api.detail-event-kontraprestasi') {
             return [
                 'id' => $this->id,
+                'photo_file' => $this->iconPhotoKontraprestasi->photo_file,
                 'name' => $this->title,
                 'range' => $this->min_sponsor.' - '.$this->max_sponsor,
                 'feedback' => $this->feedback,
