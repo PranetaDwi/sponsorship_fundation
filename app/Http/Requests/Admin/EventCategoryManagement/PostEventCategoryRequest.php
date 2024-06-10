@@ -25,7 +25,7 @@ class PostEventCategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:50',
-            'icon' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:width=30,height=30',
+            'icon' => 'required|image|mimes:jpeg,png,jpg|max:2048|dimensions:width=32,height=32',
         ];
     }
 }

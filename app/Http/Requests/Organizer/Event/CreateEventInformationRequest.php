@@ -34,7 +34,7 @@ class CreateEventInformationRequest extends FormRequest
             'participant_category' => ['required', 'array', 'max:40'],
             'participant_description' => ['required'],
             'photo_file' => ['required','array', 'max:2048'],
-            'event_category_id.*' => ['required', 'integer', 'exists:event_category_names,id'],
+            'event_category_id' => ['required', 'array'],
         ];
     }
 }
