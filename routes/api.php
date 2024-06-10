@@ -75,6 +75,7 @@ Route::prefix('v1')->group(function () {
             Route::prefix('events')->group(function () {
                 Route::get('event-categories', [EventController::class, 'eventCategories'])->name('api.event-categories');
                 Route::get('/my-event-lists', [EventController::class, 'index'])->name('api.my-event-lists');
+                
 
                 // Endpoint untuk membuat event baru
                 Route::prefix('create-event')->group(function () {
@@ -86,19 +87,17 @@ Route::prefix('v1')->group(function () {
 
                 Route::prefix('update-event')->group(function () {
                     Route::post('/{event_id}', [EventController::class, 'updateEvent'])->name('api.update-event');
-                    Route::get('/get-kontraprestasi/{event_id}', [EventController::class, 'getEventKontraprestasi'])->name('api.get-event-kontraprestasi');
-                    Route::get('/show-kontraprestasi/{id}', [EventController::class, 'showEventKontraprestasi'])->name('api.show-event-kontraprestasi');
                     Route::post('/post-update-kontraprestasi/{id}', [EventController::class, 'postUpdateKontraprestasi'])->name('api.post-update-kontraprestasi');
                 });
             });
 
             Route::post('/update-organization-data', [OrganizationController::class, 'update'])->name('api.update-organization-data');
+            Route::get('/total-donorship', [EventController::class, 'getTotalDonorship'])->name('api.total-donorship');
         });
     
         // Untuk user entrepreneur
         Route::middleware(['scopes:entrepreneur'])->group(function () {
             Route::get('/mitra-lists', [MitraController::class, 'index'])->name('api.mitra-lists');
-
             Route::post('/update-mitra-data', [MitraController::class, 'update'])->name('api.update-mitra-data');
         });
 

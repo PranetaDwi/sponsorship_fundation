@@ -25,4 +25,6 @@ interface EventService
     public function updateEvent(UpdateEventRequest$request, $event_id);
 
     public function updateEventKontraprestasi(CreateEventKontraprestasiRequest $request, $id);
+
+    public function getTotalDonorship();
 }

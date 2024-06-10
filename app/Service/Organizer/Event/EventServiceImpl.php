@@ -7,6 +7,7 @@ use App\Http\Requests\Organizer\Event\CreateEventInformationRequest;
 use App\Http\Requests\Organizer\Event\CreateEventKontraprestasiRequest;
 use App\Http\Requests\Organizer\Event\CreateEventPlacementRequest;
 use App\Http\Requests\Organizer\Event\UpdateEventRequest;
+use App\Models\User;
 use App\Repository\EventPhoto\EventPhotoRepository;
 use App\Repository\Event\EventRepository;
 use App\Repository\EventCategoryName\EventCategoryNameRepository;
@@ -18,6 +19,7 @@ use App\Repository\ParticipantCategory\ParticipantCategoryRepository;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EventServiceImpl implements EventService
@@ -306,5 +308,22 @@ class EventServiceImpl implements EventService
         }
 
         return $response;
+    }
+
+    public function getTotalDonorship(){
+        try{
+            return Auth::User()->organizer->events()
+            ->with('sponsors')
+            ->get()
+            ->pluck('sponsors')
+            ->flatten()
+            ->sum('amount');
+        } catch (\Exception $exception){
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        } catch (AuthorizationException $exception) {
+            throw new Exception('You are not authorized to access', 403);
+        }catch (ModelNotFoundException $exception) {
+            throw new Exception('Model not found', 404);
+        }
     }
 }

@@ -13,6 +13,8 @@ use App\Http\Resources\Organizer\Event\EventFundResource;
 use App\Http\Resources\Organizer\Event\EventInformationResource;
 use App\Http\Resources\Organizer\Event\EventKontraprestasiResource;
 use App\Http\Resources\Organizer\Event\EventPreviewResource;
+use App\Http\Resources\Organizer\Event\TotalDonorship;
+use App\Http\Resources\Organizer\Event\TotalDonorshipResource;
 use App\Service\Organizer\Event\EventService;
 use App\Http\Responses\ApiResponse;
 use App\Models\EventPlacement;
@@ -96,6 +98,16 @@ class EventController extends Controller
     {
         try {
             return new ApiResponse('success',  __('validation.message.created'), $this->eventService->updateEventKontraprestasi($request, $event_id), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
+    public function getTotalDonorship()
+    {
+        $totalDonorship = $this->eventService->getTotalDonorship();
+        try {
+            return new ApiResponse('success',  __('validation.message.loaded'), $totalDonorship, 200);
         } catch (\Exception $exception) {
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }
