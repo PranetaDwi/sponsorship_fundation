@@ -4,6 +4,7 @@ namespace App\Http\Requests\Organizer\Event;
 
 use App\Traits\ApiResponseValidationException;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Exists;
 
 class CreateEventInformationRequest extends FormRequest
 {
@@ -34,7 +35,8 @@ class CreateEventInformationRequest extends FormRequest
             'participant_category' => ['required', 'array', 'max:40'],
             'participant_description' => ['required'],
             'photo_file' => ['required','array', 'max:2048'],
-            'event_category_id' => ['required', 'array'],
+            // 'event_category_id' => ['required', 'array'],
+            'event_category_id.*' => ['required', 'integer', 'exists:event_category_names,id'],
         ];
     }
 }
