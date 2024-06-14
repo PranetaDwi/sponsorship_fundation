@@ -156,6 +156,18 @@ class EventServiceImpl implements EventService
                 }   
             }
 
+            // event_category
+            if ($request->has('event_category_id')) {
+                foreach ($request->event_category_id as $category) {
+                    $dataCategory = [
+                        'event_id' => $response['event_information']['id'],
+                        'event_category_name_id' => $category,
+                    ];
+                    $eventCategory[] = $this->eventCategoryRepository->save($dataCategory);
+                }   
+            }
+            $response['event_category_name_id'][] = $eventCategory;
+
         }catch (\Exception $exception){
             dd($exception->getMessage());
             throw new Exception(__('validation.message.something_went_wrong'), 500);
