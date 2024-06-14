@@ -9,4 +9,6 @@ interface EventPhotoRepository
     public function findAll();
 
     public function findById($id);
+
+    public function update($data, $id);
 }

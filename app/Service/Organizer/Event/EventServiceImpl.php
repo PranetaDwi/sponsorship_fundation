@@ -7,7 +7,6 @@ use App\Http\Requests\Organizer\Event\CreateEventInformationRequest;
 use App\Http\Requests\Organizer\Event\CreateEventKontraprestasiRequest;
 use App\Http\Requests\Organizer\Event\CreateEventPlacementRequest;
 use App\Http\Requests\Organizer\Event\UpdateEventRequest;
-use App\Models\User;
 use App\Repository\EventPhoto\EventPhotoRepository;
 use App\Repository\Event\EventRepository;
 use App\Repository\EventCategoryName\EventCategoryNameRepository;
@@ -78,6 +77,93 @@ class EventServiceImpl implements EventService
         }catch (ModelNotFoundException $exception) {
             throw new Exception('Model not found', 404);
         }
+    }
+
+    public function postEventAll(UpdateEventRequest $request)
+    {
+        $response = [];
+        try {
+
+            // information
+            $eventInformation = [
+                'organizer_id' => auth()->user()->organizer->id,
+                'title' => $request->title_event,
+                'description' => $request->description,
+                'target_participants' => $request->target_participants,
+                'participant_description' => $request->participant_description,
+                'status_event' => $request->status_event,
+                'type_event' => $request->type_event,
+            ];
+
+            $response['event_information'] = $this->eventRepository->save($eventInformation);
+
+            // fund
+            $eventFund = [
+                'event_id' => $response['event_information']['id'],
+                'target_fund' => $request->target_fund,
+                'sponsor_deadline' => $request->sponsor_deadline,
+            ];
+
+            $response['event_fund'] = $this->eventFundRepository->save($eventFund);
+
+            // placement
+            $eventPlacement = [
+                'event_id' => $response['event_information']['id'],
+                'event_start_date' => $request->event_start_date,
+                'event_end_date' => $request->event_end_date,
+                'event_venue' => $request->event_venue,
+                'address' => $request->address,
+                'city' => $request->city,
+                'province' => $request->province,
+            ];
+
+            $response['event_placement'] = $this->eventPlacementRepository->save($eventPlacement);
+
+            // photo_file
+            if ($request->hasFile('photo_file')) {
+                $photo_file = [];
+                foreach ($request->file('photo_file') as $file) {
+                    try {
+                        $filenameWithExt = $file->getClientOriginalName();
+                        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                        $extension = $file->getClientOriginalExtension();
+                        $filenameOriginal = 'organizer/events/' . $filename . '_' . time() . '.' . $extension;
+                        $path = $file->storeAs('public/' . $filenameOriginal);
+                        $photo_file = 'storage/'.$filenameOriginal;
+                        
+                        $dataPicture = [
+                            'event_id' => $response['event_information']['id'],
+                            'photo_file' => $photo_file,
+                        ];
+                        $photo_file = $this->eventPhotoRepository->save($dataPicture);
+                        $response['photo_files'][] = $photo_file;
+                    } catch (\Exception $exception) {
+                        DB::rollBack();
+                        throw new Exception('Something went wrong: ' . $exception->getMessage(), 500);
+                    }
+                }
+            }
+
+            // category participant
+            if ($request->has('participant_category')) {
+                $response['participant_categories'] = []; 
+                foreach ($request->participant_category as $category) {
+                    $data = [
+                        'event_id' => $response['event_information']['id'],
+                        'name' => $category,
+                    ];
+                    $response['participant_categories'][] = $this->participantCategoryRepository->save($data);
+                }   
+            }
+
+        }catch (\Exception $exception){
+            dd($exception->getMessage());
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        }catch (AuthorizationException $exception) {
+            throw new Exception('You are not authorized to access', 403);
+        }
+
+        return $response;
     }
 
     public function postEventInformation(CreateEventInformationRequest $request){
@@ -251,7 +337,7 @@ class EventServiceImpl implements EventService
                 'type_event' => $request->type_event,
             ];
 
-            $response['event'] = $this->eventRepository->save($eventInformation);
+            $response['event_information'] = $this->eventRepository->save($eventInformation);
 
             // fund
             $eventFund = [
@@ -260,7 +346,7 @@ class EventServiceImpl implements EventService
                 'sponsor_deadline' => $request->sponsor_deadline,
             ];
 
-            $response['event'] = $this->eventFundRepository->save($eventFund);
+            $response['event_fund'] = $this->eventFundRepository->save($eventFund);
 
             // placement
             $eventPlacement = [
@@ -273,7 +359,33 @@ class EventServiceImpl implements EventService
                 'province' => $request->province,
             ];
 
-            $response['event'] = $this->eventPlacementRepository->save($eventPlacement);
+            $response['event_placement'] = $this->eventPlacementRepository->save($eventPlacement);
+
+            // photo_file
+
+            if ($request->hasFile('photo_file')) {
+                $photo_file = [];
+                foreach ($request->file('photo_file') as $file) {
+                    try {
+                        $filenameWithExt = $file->getClientOriginalName();
+                        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                        $extension = $file->getClientOriginalExtension();
+                        $filenameOriginal = 'organizer/events/' . $filename . '_' . time() . '.' . $extension;
+                        $path = $file->storeAs('public/' . $filenameOriginal);
+                        $photo_file = 'storage/'.$filenameOriginal;
+                        
+                        $dataPicture = [
+                            'event_id' => $event_id,
+                            'photo_file' => $photo_file,
+                        ];
+                        $photo_file = $this->eventPhotoRepository->save($dataPicture);
+                    } catch (\Exception $exception) {
+                        DB::rollBack();
+                        throw new Exception('Something went wrong: ' . $exception->getMessage(), 500);
+                    }
+                }
+                $response['photo_files'][] = $photo_file;
+            }
 
         }catch (\Exception $exception){
             dd($exception->getMessage());

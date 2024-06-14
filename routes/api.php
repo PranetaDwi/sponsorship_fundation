@@ -79,6 +79,9 @@ Route::prefix('v1')->group(function () {
 
                 // Endpoint untuk membuat event baru
                 Route::prefix('create-event')->group(function () {
+                    // for all req except kontraprestasi
+                    Route::post('/post-event', [EventController::class, 'postEventAll'])->name('api.post-event');
+                    // old endpoint
                     Route::post('/post-event-information', [EventController::class, 'postEventInformation'])->name('api.post-event-information');
                     Route::post('/post-event-fund/{event_id}', [EventController::class, 'postEventFund'])->name('api.post-event-fund');
                     Route::post('/post-event-placement/{event_id}', [EventController::class, 'postEventPlacement'])->name('api.post-event-placement');

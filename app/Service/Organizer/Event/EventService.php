@@ -22,6 +22,8 @@ interface EventService
 
     public function postKontraprestasi(CreateEventKontraprestasiRequest $request, $event_id);
 
+    public function postEventAll(UpdateEventRequest $request);
+
     public function updateEvent(UpdateEventRequest$request, $event_id);
 
     public function updateEventKontraprestasi(CreateEventKontraprestasiRequest $request, $id);

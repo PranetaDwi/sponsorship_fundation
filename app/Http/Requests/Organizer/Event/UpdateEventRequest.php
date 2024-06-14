@@ -29,6 +29,7 @@ class UpdateEventRequest extends FormRequest
             'status_event' => ['required', 'string', 'max:40', 'in:publish,unpublish'],
             'description' => ['required'],
             'target_participants' => ['required', 'integer'],
+            'participant_category' => ['required', 'array', 'max:40'],
             'participant_description' => ['required'],
             'photo_file' => ['required','array', 'max:2048'],
             'event_category_id.*' => ['required', 'integer', 'exists:event_category_names,id'],

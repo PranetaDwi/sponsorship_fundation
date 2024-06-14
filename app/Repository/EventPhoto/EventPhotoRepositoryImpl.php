@@ -21,4 +21,11 @@ class EventPhotoRepositoryImpl implements EventPhotoRepository
     {
         return EventPhoto::findOrFail($id);
     }
+
+    public function update($data, $id)
+    {
+        $eventPhoto = EventPhoto::findOrFail($id);
+        $eventPhoto->update($data);
+        return $eventPhoto;
+    }
 }
