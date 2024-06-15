@@ -39,6 +39,7 @@ Route::prefix('v1')->group(function () {
 
     // Endpoint tanpa autentikasi
     Route::prefix('events')->group(function () {
+        Route::get('event-categories', [EventController::class, 'eventCategories'])->name('api.event-categories');
         Route::get('/event-populer-overview', [PublicEventController::class, 'getOverviewEventPopuler'])->name('api.overview-event-populer');
         Route::get('/event-all-overview', [PublicEventController::class, 'getOverviewEventAll'])->name('api.overview-event-all');
         Route::get('/event-category/{category_id}', [PublicEventController::class, 'getOverviewEventByCategory'])->name('api.overview-event-by-category');
@@ -73,10 +74,8 @@ Route::prefix('v1')->group(function () {
             Route::get('/organization-lists', [OrganizationController::class, 'index'])->name('api.organization-lists');
 
             Route::prefix('events')->group(function () {
-                Route::get('event-categories', [EventController::class, 'eventCategories'])->name('api.event-categories');
                 Route::get('/my-event-lists', [EventController::class, 'index'])->name('api.my-event-lists');
-                
-
+ 
                 // Endpoint untuk membuat event baru
                 Route::prefix('create-event')->group(function () {
                     // for all req except kontraprestasi
