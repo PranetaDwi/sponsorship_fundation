@@ -22,6 +22,7 @@ class EventOverviewResource extends JsonResource
                 'sponsor_countdown' => 'Sisa '.Carbon::now()->diffInDays(Carbon::parse($this->eventFund->sponsor_deadline)).' hari lagi',
                 'collected_donor' => 'Rp' . number_format($this->sponsors->sum('amount'), 0, ',', '.'),
                 'total_mitra' => $this->sponsors->unique('entrepreneur_id')->count(),
+                'progress' => $this->sponsors->sum('amount') / $this->eventFund->target_fund,
                 'cover' => $this->eventPhotos()->first()->photo_file,
                 'categories' => $this->categories()->get()->map(function ($category) {
                     return (object) [
@@ -38,6 +39,7 @@ class EventOverviewResource extends JsonResource
                 'collected_donor' => 'Rp' . number_format($this->sponsors->sum('amount'), 0, ',', '.'),
                 'total_mitra' => $this->sponsors->unique('entrepreneur_id')->count(),
                 'event_date' => date('d F Y', strtotime($this->eventPlacement->event_start_date)),
+                'progress' => $this->sponsors->sum('amount') / $this->eventFund->target_fund,
                 'cover' => $this->eventPhotos()->first()->photo_file,
                 'type_event' => $this->type_event,
                 'categories' => $this->categories()->get()->map(function ($category) {
