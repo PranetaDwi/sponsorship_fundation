@@ -20,6 +20,7 @@ class EventKontraprestasiResource extends JsonResource
                 'photo_file' => $this->iconPhotoKontraprestasi->photo_file,
                 'name' => $this->title,
                 'range' => $this->min_sponsor.' - '.$this->max_sponsor,
+                'feedback' => $this->feedback,
             ];
         } elseif ($request->route()->getName() === 'api.detail-event-kontraprestasi') {
             return [
