@@ -22,7 +22,7 @@ class PostIconRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'photo_file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'photo_file' => 'required|string|max:40',
         ];
     }
 }

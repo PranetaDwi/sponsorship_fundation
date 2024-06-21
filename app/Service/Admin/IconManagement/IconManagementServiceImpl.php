@@ -32,15 +32,15 @@ class IconManagementServiceImpl implements IconManagementService
 
     public function postIconKontraprestasi(PostIconRequest $request){
         try{
-            $file = $request->file('photo_file');
-            $filenameWithExt = $file->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $file->getClientOriginalExtension();
-            $filenameOriginal = 'admin/icon-kontrapestasi/' . $filename . '_' . time() . '.' . $extension;
-            $path = $file->storeAs('public/' . $filenameOriginal);
-            $photo_file = 'storage/'.$filenameOriginal;
+            // $file = $request->file('photo_file');
+            // $filenameWithExt = $file->getClientOriginalName();
+            // $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // $extension = $file->getClientOriginalExtension();
+            // $filenameOriginal = 'admin/icon-kontrapestasi/' . $filename . '_' . time() . '.' . $extension;
+            // $path = $file->storeAs('public/' . $filenameOriginal);
+            // $photo_file = 'storage/'.$filenameOriginal;
             $dataPicture = [
-                'photo_file' => $photo_file,
+                'photo_file' => $request->photo_file,
             ];
             return $this->iconPhotoKontraprestasiRepository->save($dataPicture);
         } catch (\Exception $exception){
