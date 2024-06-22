@@ -9,6 +9,7 @@ use App\Http\Requests\Organizer\Event\CreateEventKontraprestasiRequest;
 use App\Http\Requests\Organizer\Event\CreateEventPlacementRequest;
 use App\Http\Requests\Organizer\Event\UpdateEventRequest;
 use App\Http\Resources\Organizer\Event\EventCategoriesResource;
+use App\Http\Resources\Organizer\Event\EventDetailBundlingResource;
 use App\Http\Resources\Organizer\Event\EventPreviewResource;
 use App\Service\Organizer\Event\EventService;
 use App\Http\Responses\ApiResponse;
@@ -83,6 +84,16 @@ class EventController extends Controller
     {
         try {
             return new ApiResponse('success',  __('validation.message.created'), $this->eventService->postKontraprestasi($request, $event_id), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
+    public function getDetailEventBundling($id)
+    {
+        try {
+            $eventDetail = $this->eventService->getDetailEvent($id);
+            return new ApiResponse('success',  __('validation.message.loaded'), new EventDetailBundlingResource($eventDetail), 200);
         } catch (\Exception $exception) {
             return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
         }

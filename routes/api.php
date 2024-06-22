@@ -88,6 +88,7 @@ Route::prefix('v1')->group(function () {
                 });
 
                 Route::prefix('update-event')->group(function () {
+                    Route::get('/detail-event/{id}', [EventController::class, 'getDetailEventBundling'])->name('api.get-detail-event-bundling');  
                     Route::post('/{event_id}', [EventController::class, 'updateEvent'])->name('api.update-event');    
                 });
 
