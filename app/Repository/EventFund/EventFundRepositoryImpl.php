@@ -13,6 +13,7 @@ class EventFundRepositoryImpl implements EventFundRepository
 
     public function update($data, $event_id)
     {
-        return EventFund::where('event_id', $event_id)->update($data);
+        EventFund::where('event_id', $event_id)->update($data);
+        return EventFund::where('event_id', $event_id)->first();
     }
 }

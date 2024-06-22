@@ -14,6 +14,7 @@ class EventPlacementRepositoryImpl implements EventPlacementRepository
 
     public function update($data, $event_id)
     {
-        return EventPlacement::where('event_id', $event_id)->update($data);
+        EventPlacement::where('event_id', $event_id)->update($data);
+        return EventPlacement::where('event_id', $event_id)->first();
     }
 }

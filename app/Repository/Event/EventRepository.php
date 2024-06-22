@@ -14,5 +14,5 @@ interface EventRepository
 
     public function update($data, $event_id);
 
-    public function delete($d); 
+    public function delete($id); 
 }
