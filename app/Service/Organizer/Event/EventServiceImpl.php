@@ -349,7 +349,7 @@ class EventServiceImpl implements EventService
                 'type_event' => $request->type_event,
             ];
 
-            $response['event_information'] = $this->eventRepository->save($eventInformation);
+            $response['event_information'] = $this->eventRepository->update($eventInformation, $event_id);
 
             // fund
             $eventFund = [
@@ -358,7 +358,7 @@ class EventServiceImpl implements EventService
                 'sponsor_deadline' => $request->sponsor_deadline,
             ];
 
-            $response['event_fund'] = $this->eventFundRepository->save($eventFund);
+            $response['event_fund'] = $this->eventFundRepository->update($eventFund, $event_id);
 
             // placement
             $eventPlacement = [
@@ -371,10 +371,9 @@ class EventServiceImpl implements EventService
                 'province' => $request->province,
             ];
 
-            $response['event_placement'] = $this->eventPlacementRepository->save($eventPlacement);
+            $response['event_placement'] = $this->eventPlacementRepository->update($eventPlacement, $event_id);
 
             // photo_file
-
             if ($request->hasFile('photo_file')) {
                 $photo_file = [];
                 foreach ($request->file('photo_file') as $file) {
@@ -409,7 +408,6 @@ class EventServiceImpl implements EventService
         return $response;
 
     }
-
 
     public function updateEventKontraprestasi(CreateEventKontraprestasiRequest $request, $id){
         $response = [];

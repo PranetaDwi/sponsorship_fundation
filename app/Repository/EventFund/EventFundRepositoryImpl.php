@@ -10,4 +10,9 @@ class EventFundRepositoryImpl implements EventFundRepository
     {
         return EventFund::create($data);
     }
+
+    public function update($data, $event_id)
+    {
+        return EventFund::where('event_id', $event_id)->update($data);
+    }
 }

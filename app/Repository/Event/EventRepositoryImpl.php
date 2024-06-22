@@ -25,4 +25,9 @@ class EventRepositoryImpl implements EventRepository
     {
         return Event::where('organizer_id', $organizerId)->get();
     }
+
+    public function update($data, $event_id)
+    {
+        return Event::where('id', $event_id)->update($data);
+    }
 }

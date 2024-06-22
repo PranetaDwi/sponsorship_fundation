@@ -31,7 +31,7 @@ class UpdateEventRequest extends FormRequest
             'target_participants' => ['required', 'integer'],
             'participant_category' => ['required', 'array', 'max:40'],
             'participant_description' => ['required'],
-            'photo_file' => ['required','array', 'max:2048'],
+            'photo_file' => ['array', 'max:2048'],
             'event_category_id.*' => ['required', 'integer', 'exists:event_category_names,id'],
             'target_fund' => ['required', 'integer'],
             'sponsor_deadline' => ['required', 'date'],
