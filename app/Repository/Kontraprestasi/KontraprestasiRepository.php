@@ -14,4 +14,6 @@ interface KontraprestasiRepository
 
     public function update($data, $id);
 
+    public function delete($id);
+
 }

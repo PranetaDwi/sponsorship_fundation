@@ -30,4 +30,9 @@ class EventRepositoryImpl implements EventRepository
     {
         return Event::where('id', $event_id)->update($data);
     }
+
+    public function delete($id)
+    {
+        return Event::where('id', $id)->delete();
+    }
 }

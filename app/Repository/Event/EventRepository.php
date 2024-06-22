@@ -13,4 +13,6 @@ interface EventRepository
     public function findByOrganizerId($organizerId);
 
     public function update($data, $event_id);
+
+    public function delete($d); 
 }

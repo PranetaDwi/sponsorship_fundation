@@ -32,4 +32,9 @@ class KontraprestasiRepositoryImpl implements KontraprestasiRepository
         return Kontraprestasi::where('id', $id)->update($data);
     }
 
+    public function delete($id)
+    {
+        return Kontraprestasi::where('id', $id)->delete();
+    }
+
 }
