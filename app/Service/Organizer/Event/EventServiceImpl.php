@@ -448,6 +448,18 @@ class EventServiceImpl implements EventService
         }
     }
 
+    public function deleteEvent($id){
+        try{
+            return $this->eventRepository->delete($id);
+        } catch (\Exception $exception){
+            throw new Exception(__('validation.message.something_went_wrong'), 500);
+        } catch (AuthorizationException $exception) {
+            throw new Exception('You are not authorized to access', 403);
+        }catch (ModelNotFoundException $exception) {
+            throw new Exception('Model not found', 404);
+        }
+    }
+
     public function deleteEventKontraprestasi($id){
         try{
             return $this->kontraprestasiRepository->delete($id);

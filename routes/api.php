@@ -91,6 +91,10 @@ Route::prefix('v1')->group(function () {
                     Route::post('/{event_id}', [EventController::class, 'updateEvent'])->name('api.update-event');    
                 });
 
+                Route::prefix('delete-event')->group(function () {
+                    Route::Delete('/{id}', [EventController::class, 'deleteEvent'])->name('api.delete-event');    
+                });
+
                 Route::post('/post-update-kontraprestasi/{id}', [EventController::class, 'postUpdateKontraprestasi'])->name('api.post-update-kontraprestasi');
                 Route::delete('/delete-event-kontraprestasi/{id}', [EventController::class, 'deleteEventKontraprestasi'])->name('api.delete-event-kontraprestasi');
             });

@@ -34,7 +34,6 @@ class EventRepositoryImpl implements EventRepository
 
     public function delete($id)
     {
-        Event::where('id', $id)->delete();
-        return $this->findById($id);
+        return Event::where('id', $id)->delete();
     }
 }

@@ -30,5 +30,7 @@ interface EventService
 
     public function getTotalDonorship();
 
+    public function deleteevent($id);
+
     public function deleteEventKontraprestasi($id);
 }
