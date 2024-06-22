@@ -91,9 +91,13 @@ Route::prefix('v1')->group(function () {
                     Route::post('/{event_id}', [EventController::class, 'updateEvent'])->name('api.update-event');
                     Route::post('/post-update-kontraprestasi/{id}', [EventController::class, 'postUpdateKontraprestasi'])->name('api.post-update-kontraprestasi');
                 });
+                
+                Route::delete('/delete-event-kontraprestasi/{id}', [EventController::class, 'deleteEventKontraprestasi'])->name('api.delete-event-kontraprestasi');
             });
 
             Route::post('/update-organization-data', [OrganizationController::class, 'update'])->name('api.update-organization-data');
+            Route::get('/total-donorship', [EventController::class, 'getTotalDonorship'])->name('api.total-donorship');
+
             Route::get('/total-donorship', [EventController::class, 'getTotalDonorship'])->name('api.total-donorship');
         });
     

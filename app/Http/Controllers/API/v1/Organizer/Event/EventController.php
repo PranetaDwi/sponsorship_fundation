@@ -116,4 +116,13 @@ class EventController extends Controller
         }
     }
 
+    public function deleteEventKontraprestasi($id)
+    {
+        try {
+            return new ApiResponse('success',  __('validation.message.deleted'), $this->eventService->deleteEventKontraprestasi($id), 200);
+        } catch (\Exception $exception) {
+            return new ApiResponse('error',  $exception->getMessage(), null, $exception->getCode());
+        }
+    }
+
 }
