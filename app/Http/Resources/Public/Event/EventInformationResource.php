@@ -25,6 +25,7 @@ class EventInformationResource extends JsonResource
             'address' => 'di '.$this->eventPlacement->address.', '.$this->eventPlacement->city.', '.$this->eventPlacement->province,
             'fund_information' => 'Rp' . number_format($this->sponsors->sum('amount'), 0, ',', '.').' terkumpul dari Rp'.number_format($this->eventFund->target_fund, 0, ',', '.'),
             'persentase' => ($this->sponsors->sum('amount') / $this->eventFund->target_fund) * 100,
+            'progress' => $this->sponsors->sum('amount') / $this->eventFund->target_fund,
             'total_mitra' => $this->sponsors->unique('entrepreneur_id')->count(),
             'sponsor_countdown' => 'Sisa '.Carbon::now()->diffInDays(Carbon::parse($this->eventFund->sponsor_deadline)).' hari lagi',
             'target_participants' => $this->target_participants,
