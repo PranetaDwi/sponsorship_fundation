@@ -413,7 +413,6 @@ class EventServiceImpl implements EventService
         $response = [];
         try {
             $eventKontraprestasi = [
-                'event_id' => $id,
                 'title' => $request->title,
                 'min_sponsor' => $request->min_sponsor,
                 'max_sponsor' => $request->max_sponsor,

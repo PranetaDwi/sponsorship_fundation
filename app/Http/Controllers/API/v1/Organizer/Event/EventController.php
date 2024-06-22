@@ -97,7 +97,7 @@ class EventController extends Controller
         }
     }
 
-    public function updateEventKontraprestasi(CreateEventKontraprestasiRequest $request, $event_id)
+    public function postUpdateKontraprestasi(CreateEventKontraprestasiRequest $request, $event_id)
     {
         try {
             return new ApiResponse('success',  __('validation.message.created'), $this->eventService->updateEventKontraprestasi($request, $event_id), 200);

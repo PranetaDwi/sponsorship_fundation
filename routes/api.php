@@ -88,10 +88,10 @@ Route::prefix('v1')->group(function () {
                 });
 
                 Route::prefix('update-event')->group(function () {
-                    Route::post('/{event_id}', [EventController::class, 'updateEvent'])->name('api.update-event');
-                    Route::post('/post-update-kontraprestasi/{id}', [EventController::class, 'postUpdateKontraprestasi'])->name('api.post-update-kontraprestasi');
+                    Route::post('/{event_id}', [EventController::class, 'updateEvent'])->name('api.update-event');    
                 });
-                
+
+                Route::post('/post-update-kontraprestasi/{id}', [EventController::class, 'postUpdateKontraprestasi'])->name('api.post-update-kontraprestasi');
                 Route::delete('/delete-event-kontraprestasi/{id}', [EventController::class, 'deleteEventKontraprestasi'])->name('api.delete-event-kontraprestasi');
             });
 

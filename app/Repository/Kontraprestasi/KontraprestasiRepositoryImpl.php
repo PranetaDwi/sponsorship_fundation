@@ -29,7 +29,8 @@ class KontraprestasiRepositoryImpl implements KontraprestasiRepository
 
     public function update($data, $id)
     {
-        return Kontraprestasi::where('id', $id)->update($data);
+        Kontraprestasi::where('id', $id)->update($data);
+        return $this->findById($id);
     }
 
     public function delete($id)
