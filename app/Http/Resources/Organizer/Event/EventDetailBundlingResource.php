@@ -28,6 +28,7 @@ class EventDetailBundlingResource extends JsonResource
             'event_end_date' => $this->eventPlacement->event_end_date,
             'organization' => $this->organizer->organization->name,
             'province' => $this->eventPlacement->province,
+            'event_venue' => $this->eventPlacement->event_venue,
             'city' => $this->eventPlacement->city,
             'address' => $this->eventPlacement->address,
             'target_dana' => $this->eventFund->target_fund,
