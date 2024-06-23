@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Organizer\Event;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,15 +25,15 @@ class EventDetailBundlingResource extends JsonResource
             'participant_categories' => $this->participantCategories()->first()->name,
             'participant_description' => $this->participant_description,
             'event_desciprtion' => $this->description,
-            'event_start_date' => $this->eventPlacement->event_start_date,
-            'event_end_date' => $this->eventPlacement->event_end_date,
+            'event_start_date' => Carbon::parse($this->eventPlacement->event_start_date)->format('d/m/Y'),
+            'event_end_date' => Carbon::parse($this->eventPlacement->event_end_date)->format('d/m/Y'),
             'organization' => $this->organizer->organization->name,
             'province' => $this->eventPlacement->province,
             'event_venue' => $this->eventPlacement->event_venue,
             'city' => $this->eventPlacement->city,
             'address' => $this->eventPlacement->address,
             'target_dana' => $this->eventFund->target_fund,
-            'sponsor_deadline' => $this->eventFund->sponsor_deadline,  
+            'sponsor_deadline' => Carbon::parse($this->eventFund->sponsor_deadline)->format('d/m/Y'),  
         ];
     }
 }
