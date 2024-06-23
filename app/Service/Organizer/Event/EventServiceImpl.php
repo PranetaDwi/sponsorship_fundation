@@ -7,6 +7,7 @@ use App\Http\Requests\Organizer\Event\CreateEventInformationRequest;
 use App\Http\Requests\Organizer\Event\CreateEventKontraprestasiRequest;
 use App\Http\Requests\Organizer\Event\CreateEventPlacementRequest;
 use App\Http\Requests\Organizer\Event\UpdateEventRequest;
+use App\Models\Event;
 use App\Repository\EventPhoto\EventPhotoRepository;
 use App\Repository\Event\EventRepository;
 use App\Repository\EventCategoryName\EventCategoryNameRepository;
@@ -387,6 +388,7 @@ class EventServiceImpl implements EventService
 
             // photo_file
             if ($request->hasFile('photo_file')) {
+                $photo_file_id = Event::findOrFail($event_id)->eventPhotos()->first()->id;
                 $photo_file = [];
                 foreach ($request->file('photo_file') as $file) {
                     try {
@@ -401,7 +403,7 @@ class EventServiceImpl implements EventService
                             'event_id' => $event_id,
                             'photo_file' => $photo_file,
                         ];
-                        $photo_file = $this->eventPhotoRepository->save($dataPicture);
+                        $photo_file = $this->eventPhotoRepository->update($dataPicture, $photo_file_id);
                     } catch (\Exception $exception) {
                         DB::rollBack();
                         throw new Exception('Something went wrong: ' . $exception->getMessage(), 500);
